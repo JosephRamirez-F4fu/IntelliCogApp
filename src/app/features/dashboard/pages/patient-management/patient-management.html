@@ -1,0 +1,58 @@
+<header class="header">
+  <h1>Pacientes</h1>
+  <div class="user-info">
+    <span class="user-icon">👤</span>
+    <span>Juan Pérez</span>
+  </div>
+</header>
+
+<div class="filters">
+  <select>
+    <option>Todos</option>
+    <option>Control</option>
+    <option>MCI</option>
+    <option>Demencia</option>
+  </select>
+  <input type="date"/>
+  <input type="text" placeholder="DNI"/>
+  <button class="btn filter">Filtrar</button>
+</div>
+
+<table class="patients-table">
+  <thead>
+  <tr>
+    <th>DNI</th>
+    <th>Nombre</th>
+    <th>Edad</th>
+    <th>Fecha de evaluación</th>
+    <th>Estado cognitivo</th>
+    <th>Acciones</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>84494526</td>
+    <td><a href="#">Sofía García</a></td>
+    <td>40</td>
+    <td>20/02/2024</td>
+    <td><span class="badge control">Control</span></td>
+    <td>
+      <button class="btn small">Editar</button>
+      <button class="btn small danger">Eliminar</button>
+    </td>
+  </tr>
+  <tr>
+    <td>84494526</td>
+    <td><a href="#">Sofía García</a></td>
+    <td>40</td>
+    <td>20/02/2024</td>
+    <td><span class="badge control">Control</span></td>
+    <td>
+      <button class="btn small">Editar</button>
+      <button class="btn small danger">Eliminar</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<div class="pagination">1-8 de 8 &lt; 1 &gt;</div>

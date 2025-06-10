@@ -1,0 +1,70 @@
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+
+.logo img {
+  width: 40px;
+  height: auto;
+}
+
+.logo h2 {
+  font-size: 20px;
+  margin: 0;
+}
+
+.sidebar {
+  background-color: #c0cee9;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 30px;
+  width: 250px;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
+.sidebar nav a {
+  display: block;
+  padding: 10px;
+  border-radius: 5px;
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.sidebar nav a.active,
+.sidebar nav a:hover {
+  background-color: #d3ddf0;
+  font-weight: bold;
+}
+
+.main {
+  flex: 1;
+  padding: 30px 40px;
+  background-color: #fff;
+}
+
+.main h1 {
+  font-size: 22px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.main h1 {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.main p {
+  font-size: 14px;
+  margin-bottom: 30px;
+}

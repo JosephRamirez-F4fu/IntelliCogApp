@@ -1,0 +1,48 @@
+<header class="header">
+  <h1>Generar Reporte PDF</h1>
+  <div class="user-info">
+    <span class="user-icon">👤</span>
+    <span>Juan Pérez</span>
+  </div>
+</header>
+
+<form class="reporte-form">
+  <label>Buscar Paciente</label>
+  <input type="text" placeholder="DNI del paciente" />
+
+  <div class="reporte-box">
+    <div class="fila paciente">
+      <strong>Carmen Gómez</strong>
+      <span>DNI: xxxxxxxxxx</span>
+      <span>Edad: xx</span>
+      <span>Sexo: xx</span>
+      <span>Fecha de evaluación: dd/mm/aaaa</span>
+    </div>
+
+    <div class="fila contenido">
+      <div class="columna">
+        <h4>Variables clínicas y resultados</h4>
+        <p>YYY: xx</p>
+        <p>YYY: xx</p>
+        <p>YYY: xx</p>
+      </div>
+      <div class="columna">
+        <h4>Estado cognitivo clasificado</h4>
+        <p>Deterioro leve (MCI)</p>
+        <h4>Variables más influyente</h4>
+        <p>XXXX</p>
+        <p>XXXX</p>
+        <p>XXXX</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="acciones">
+    <button type="button" class="btn primary">Generar Y Descargar PDF</button>
+
+    <div class="correo">
+      <button type="button" class="btn outlined">Enviar Por Correo</button>
+      <input type="email" placeholder="Correo del paciente" />
+    </div>
+  </div>
+</form>

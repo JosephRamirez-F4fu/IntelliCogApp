@@ -1,0 +1,38 @@
+<header class="header">
+  <h1>Ejecución de clasificación</h1>
+  <div class="user-info">
+    <span class="user-icon">👤</span>
+    <span>Juan Pérez</span>
+  </div>
+</header>
+
+<form class="clasificacion-form">
+  <label>Buscar Paciente</label>
+  <input type="text" placeholder="DNI del paciente" />
+
+  <div class="info-box">
+    <div class="info-paciente">
+      <h3>Información del Paciente</h3>
+      <p><strong>Nombre:</strong> xx</p>
+      <p><strong>Edad:</strong> xx</p>
+      <p><strong>Sexo:</strong> xx</p>
+      <p><strong>Evaluaciones previas:</strong> x</p>
+
+      <button type="button" class="btn ejecutar">Ejecutar Por Datos Clínicos</button>
+      <button type="button" class="btn ejecutar">Ejecutar Por Imagen</button>
+    </div>
+
+    <div class="resultado">
+      <div class="box">
+        <h4>Resultado de la clasificación</h4>
+        <div class="badge danger">MCI + Demencia</div>
+      </div>
+      <div class="box">
+        <h4>Nivel de confianza</h4>
+        <div class="confidence-circle">88%</div>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn detalle">Ver Detalle</button>
+</form>
