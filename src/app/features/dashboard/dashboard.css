@@ -1,20 +1,4 @@
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 40px;
-}
-
-.logo img {
-  width: 40px;
-  height: auto;
-}
-
-.logo h2 {
-  font-size: 20px;
-  margin: 0;
-}
-
+/* Sidebar */
 .sidebar {
   background-color: #c0cee9;
   display: flex;
@@ -22,6 +6,8 @@
   justify-content: space-between;
   padding: 30px;
   width: 250px;
+  min-height: 100vh;
+  flex-shrink: 0;
 }
 
 .sidebar nav {
@@ -47,21 +33,45 @@
   font-weight: bold;
 }
 
+/* Contenido principal */
 .main {
   flex: 1;
   padding: 30px 40px;
   background-color: #fff;
+  min-height: 100vh;
+  overflow-y: auto;
 }
 
+/* Estilos del logo */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+
+.logo img {
+  width: 40px;
+  height: auto;
+}
+
+.logo h2 {
+  font-size: 20px;
+  margin: 0;
+}
+
+/* Estilos del contenido principal */
 .main h1 {
   font-size: 22px;
   font-weight: bold;
   margin: 0;
+  margin-bottom: 10px;
 }
 
-.main h1 {
-  font-size: 22px;
-  margin-bottom: 10px;
+.main h2 {
+  font-size: 18px;
+  color: #444;
+  margin-bottom: 20px;
 }
 
 .main p {

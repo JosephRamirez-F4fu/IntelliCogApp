@@ -1,0 +1,101 @@
+.profile-info {
+  max-width: 600px;
+}
+
+.avatar-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.name-role h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.name-role p {
+  margin: 5px 0 0;
+  font-size: 16px;
+  color: #555;
+}
+
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  gap: 20px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 100%;
+  font-size: 15px;
+  background-color: #f3f3f3;
+}
+
+input:disabled {
+  background-color: #f3f3f3;
+  color: #aaa;
+  font-weight: 600;
+}
+
+label {
+  font-weight: 500;
+  margin-bottom: 3px;
+  display: block;
+}
+
+.input-password {
+  position: relative;
+}
+
+.input-password input {
+  padding-right: 30px;
+}
+
+.eye {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.change-password {
+  background-color: #5a67d8;
+  color: white;
+  width: 180px;
+}
+
+.save {
+  background-color: #5a67d8;
+  color: white;
+  align-self: flex-start;
+  width: 120px;
+}

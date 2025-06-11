@@ -1,4 +1,31 @@
-<button routerLink="/dashboard">Registrarse</button>
-<br>
-<br>
-<button routerLink="/login">Ya tienes una cuenta? Inicia sesion</button>
+<div class="registro-container">
+  <div class="registro-box">
+    <img ngSrc="images/logo.jpeg" width="100" height="99" alt="Logo IntelliCog" class="logo" />
+    <h1 class="titulo">IntelliCog</h1>
+    <h2 class="subtitulo">REGISTRAR NUEVO USUARIO</h2>
+
+    <form>
+      <label for="nombres">Nombres</label>
+      <input type="text" id="nombres" placeholder="Pedro Gonzáles" />
+
+      <label for="apellidos">Apellidos</label>
+      <input type="text" id="apellidos" placeholder="García Pérez" />
+
+      <label for="correo">Correo Electrónico</label>
+      <input type="email" id="correo" placeholder="pedro.gonzales@example.com" />
+
+      <label for="contrasena">Contraseña</label>
+      <input type="password" id="contrasena" placeholder="********" />
+
+      <label for="confirmar">Confirmar contraseña</label>
+      <input type="password" id="confirmar" placeholder="********" />
+
+<!--      <button type="submit" class="btn-registrar" routerLink="/dashboard">Registrar</button>-->
+      <button type="button" class="btn-registrar" routerLink="/dashboard">Registrar</button>
+    </form>
+
+    <p class="link">
+      ¿Ya Tienes Una Cuenta? | <a routerLink="/login">Inicia Sesión</a>
+    </p>
+  </div>
+</div>

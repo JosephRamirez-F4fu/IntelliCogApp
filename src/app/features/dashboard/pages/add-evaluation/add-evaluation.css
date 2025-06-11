@@ -1,0 +1,53 @@
+.evaluacion-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 900px;
+}
+
+.evaluacion-form label {
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+.evaluacion-form input,
+.evaluacion-form textarea {
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #f8f8f8;
+}
+
+.form-columns {
+  display: flex;
+  gap: 40px;
+  margin-top: 20px;
+}
+
+.column {
+  flex: 1;
+}
+
+.column h3 {
+  font-size: 16px;
+  margin-bottom: 10px;
+  margin-top: 20px;
+  color: #222;
+}
+
+.btn.guardar {
+  margin-top: 30px;
+  background-color: #5a67d8;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-weight: bold;
+  font-size: 14px;
+  border-radius: 24px;
+  width: 160px;
+  align-self: center;
+  cursor: pointer;
+}

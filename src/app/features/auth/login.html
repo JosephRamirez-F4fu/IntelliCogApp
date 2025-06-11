@@ -1,4 +1,32 @@
-<button routerLink="/dashboard">Iniciar Sesion</button>
-<br>
-<br>
-<button routerLink="/register">No tienes una cuenta? Crea una</button>
+<div class="login-container">
+  <div class="login-box">
+    <img ngSrc="images/logo.jpeg" width="100" height="99" alt="Logo IntelliCog" class="logo" />
+    <h1 class="titulo">IntelliCog</h1>
+    <p class="subtitulo">
+      Plataforma inteligente para la Clasificación<br />
+      del Deterioro Cognitivo
+    </p>
+
+    <form>
+      <label for="usuario">Usuario</label>
+      <div class="input-group">
+        <span class="icono">👤</span>
+        <input type="text" id="usuario" placeholder="Usuario" />
+      </div>
+
+      <label for="contrasena">Contraseña</label>
+      <div class="input-group">
+        <span class="icono">🔒</span>
+        <input type="password" id="contrasena" placeholder="Contraseña" />
+      </div>
+
+<!--      <button type="submit" class="btn-login" routerLink="/dashboard">Iniciar Sesión</button>-->
+      <button type="button" class="btn-login" routerLink="/dashboard">Iniciar Sesión</button>
+    </form>
+
+    <p class="link"><a href="#">¿Olvidó Su Contraseña?</a></p>
+    <p class="link">
+      ¿Eres Nuevo Aquí? Haga Clic <a routerLink="/register">Aquí</a> Para Crear Una Cuenta
+    </p>
+  </div>
+</div>

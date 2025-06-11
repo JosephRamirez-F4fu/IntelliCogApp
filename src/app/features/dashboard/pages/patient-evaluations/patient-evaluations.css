@@ -1,0 +1,54 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.contenido {
+  margin-top: 20px;
+}
+
+.paciente {
+  color: #c94f4f;
+}
+
+.grafico-box {
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.grafico-box h3 {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.grafico {
+  width: 100%;
+  max-width: 600px;
+  display: block;
+  margin: auto;
+}
+
+.btn.regresar {
+  margin-top: 30px;
+  background-color: #5a67d8;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-weight: bold;
+  font-size: 14px;
+  border-radius: 24px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  cursor: pointer;
+}
+
+.grafico-box img {
+  object-fit: contain;
+  position: relative;
+  width: 560px;
+  height: 360px;
+}

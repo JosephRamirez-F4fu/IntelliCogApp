@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
 import { RouterLink } from "@angular/router";
+import { NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-register',
-    imports: [
-        RouterLink
-    ],
+  imports: [
+    RouterLink,
+    NgOptimizedImage
+  ],
   templateUrl: './register.html',
-  styles: ``
+  styleUrls: ['./auth.css']
 })
 export class Register {
 
