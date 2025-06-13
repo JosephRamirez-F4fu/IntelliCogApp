@@ -4,24 +4,23 @@
     <h1 class="titulo">IntelliCog</h1>
     <h2 class="subtitulo">REGISTRAR NUEVO USUARIO</h2>
 
-    <form>
+    <form (ngSubmit)="register()">
       <label for="nombres">Nombres</label>
-      <input type="text" id="nombres" placeholder="Pedro Gonzáles" />
+      <input type="text" id="nombres" [(ngModel)]="firstName" name="firstName" placeholder="Pedro Gonzáles" required />
 
       <label for="apellidos">Apellidos</label>
-      <input type="text" id="apellidos" placeholder="García Pérez" />
+      <input type="text" id="apellidos" [(ngModel)]="lastName" name="lastName" placeholder="García Pérez" required />
 
       <label for="correo">Correo Electrónico</label>
-      <input type="email" id="correo" placeholder="pedro.gonzales@example.com" />
+      <input type="email" id="correo" [(ngModel)]="email" name="email" placeholder="pedro.gonzales@example.com" required />
 
       <label for="contrasena">Contraseña</label>
-      <input type="password" id="contrasena" placeholder="********" />
+      <input type="password" id="contrasena" [(ngModel)]="password" name="password" placeholder="********" required />
 
       <label for="confirmar">Confirmar contraseña</label>
-      <input type="password" id="confirmar" placeholder="********" />
+      <input type="password" id="confirmar" [(ngModel)]="confirmPassword" name="confirmPassword" placeholder="********" required />
 
-<!--      <button type="submit" class="btn-registrar" routerLink="/dashboard">Registrar</button>-->
-      <button type="button" class="btn-registrar" routerLink="/dashboard">Registrar</button>
+      <button type="submit" class="btn-registrar">Registrar</button>
     </form>
 
     <p class="link">

@@ -4,7 +4,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: sticky; /* Cambiar a sticky */
+  top: 0; /* Fijar en la parte superior */
+  z-index: 1000; /* Asegurar que esté por encima de otros elementos */
 }
+
+
 
 .nav a {
   margin-right: 25px;
@@ -129,4 +134,8 @@
   width: 30px;
   height: 30px;
   object-fit: contain;
+}
+
+html {
+  scroll-behavior: smooth;
 }

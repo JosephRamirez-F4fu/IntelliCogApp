@@ -7,21 +7,20 @@
       del Deterioro Cognitivo
     </p>
 
-    <form>
+    <form (ngSubmit)="login()">
       <label for="usuario">Usuario</label>
       <div class="input-group">
         <span class="icono">👤</span>
-        <input type="text" id="usuario" placeholder="Usuario" />
+        <input type="text" id="usuario" [(ngModel)]="username" name="username" placeholder="Usuario" required />
       </div>
 
       <label for="contrasena">Contraseña</label>
       <div class="input-group">
         <span class="icono">🔒</span>
-        <input type="password" id="contrasena" placeholder="Contraseña" />
+        <input type="password" id="contrasena" [(ngModel)]="password" name="password" placeholder="Contraseña" required />
       </div>
 
-<!--      <button type="submit" class="btn-login" routerLink="/dashboard">Iniciar Sesión</button>-->
-      <button type="button" class="btn-login" routerLink="/dashboard">Iniciar Sesión</button>
+      <button type="submit" class="btn-login">Iniciar Sesión</button>
     </form>
 
     <p class="link"><a href="#">¿Olvidó Su Contraseña?</a></p>

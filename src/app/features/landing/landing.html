@@ -4,14 +4,14 @@
     <span>IntelliCog</span>
   </div>
   <nav class="nav">
-    <a href="#">Inicio</a>
-    <a href="#">Acerca de</a>
-    <a href="#">Contacto</a>
+    <a href="#inicio">Inicio</a>
+    <a href="#acerca">Acerca de</a>
+    <a href="#contacto">Contacto</a>
     <button class="btn-login" routerLink="/login">Iniciar Sesión</button>
   </nav>
 </header>
 
-<section class="intro">
+<section class="intro" id="inicio">
   <div class="intro-text">
     <h2>Plataforma inteligente para el apoyo diagnóstico del deterioro cognitivo en adultos mayores</h2>
     <p>
@@ -23,18 +23,18 @@
   </div>
 </section>
 
-<section class="descripcion">
+<section class="descripcion" id="acerca">
   <div class="descripcion-text">
     <p>
       IntelliCog es una plataforma inteligente para la clasificación del deterioro cognitivo en adultos mayores, que integra el análisis de variables clínicas, funcionales, bioquímicas y neuroimágenes (EEG y MRI). Utiliza un enfoque multimodal con modelos combinados de Random Forest y Redes Neuronales Convolucionales (CNN) entrenados con datos reales, permitiendo predecir con alta precisión si el paciente se encuentra en estado Control, con Deterioro Cognitivo Leve (MCI) o Demencia. Incluye módulos de interpretación basados en SHAP y generación automática de reportes en PDF.
     </p>
   </div>
-  <div class="descripcion-img">
+  <div class="descripcion-img" >
     <img ngSrc="images/landing2.png" fill alt="Doctor y análisis" />
   </div>
 </section>
 
-<footer class="footer">
+<footer class="footer" id="contacto">
   <h3>📞 Contacto</h3>
   <p>¿Tienes preguntas o sugerencias?<br />Contáctanos a través de:</p>
   <p>

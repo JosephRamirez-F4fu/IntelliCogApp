@@ -10,6 +10,7 @@ import { AppError } from '../models/app-error';
 export class HttpService {
   static readonly CONNECTION_REFUSE = 0;
   static readonly UNAUTHORIZED = 401;
+  private token: string | null = null;
 
   private headers!: HttpHeaders;
   private params!: HttpParams;
@@ -25,6 +26,10 @@ export class HttpService {
     this.headers = new HttpHeaders();
     this.params = new HttpParams();
     this.responseType = 'json';
+  }
+
+  setToken(token: string): void {
+    this.token = token;
   }
 
   paramsFrom(dto: any): this {
@@ -56,9 +61,10 @@ export class HttpService {
     return this;
   }
 
-  post(endpoint: string, body?: object): Observable<any> {
+  post(endpoint: string, body?: any, options?: any): Observable<any> {
+    const requestOptions = { ...this.createOptions(), ...options };
     return this.http
-      .post(endpoint, body, this.createOptions())
+      .post(endpoint, body, requestOptions)
       .pipe(
         map(response => this.extractData(response)),
         catchError(error => this.handleError(error))
@@ -108,8 +114,12 @@ export class HttpService {
   }
 
   private createOptions(): any {
+    let headers = this.headers;
+    if (this.token) {
+      headers = headers.append('Authorization', `Bearer ${this.token}`);
+    }
     const options: any = {
-      headers: this.headers,
+      headers: headers,
       params: this.params,
       responseType: this.responseType,
       observe: 'response'
