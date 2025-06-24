@@ -1,0 +1,5 @@
+<div class="user-bar" *ngIf="user">
+  <a class="user-link" [routerLink]="['/dashboard']">
+    {{ user.name + " " + user.last_name }}
+  </a>
+</div>

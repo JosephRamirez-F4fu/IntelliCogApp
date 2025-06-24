@@ -1,0 +1,84 @@
+<div class="registro-container">
+  <div class="registro-box">
+    <img
+      ngSrc="images/logo.jpeg"
+      width="100"
+      height="99"
+      alt="Logo IntelliCog"
+      class="logo"
+    />
+    <h1 class="titulo">IntelliCog</h1>
+    <h2 class="subtitulo">REGISTRAR NUEVO USUARIO</h2>
+
+    <form (ngSubmit)="register()">
+      <label for="nombres">Nombres</label>
+      <input
+        type="text"
+        id="nombres"
+        [(ngModel)]="firstName"
+        name="firstName"
+        placeholder="Pedro Gonzáles"
+        required
+      />
+
+      <label for="apellidos">Apellidos</label>
+      <input
+        type="text"
+        id="apellidos"
+        [(ngModel)]="lastName"
+        name="lastName"
+        placeholder="García Pérez"
+        required
+      />
+
+      <label for="Especialidad">Especialidad</label>
+      <select
+        id="especialidad"
+        [(ngModel)]="speciality"
+        name="speciality"
+        required
+      >
+        <option value="" disabled selected>Selecciona una especialidad</option>
+        <option *ngFor="let esp of especialities" [value]="esp">
+          {{ esp }}
+        </option>
+      </select>
+
+      <label for="correo">Correo Electrónico</label>
+      <input
+        type="email"
+        id="correo"
+        [(ngModel)]="email"
+        name="email"
+        placeholder="pedro.gonzales@example.com"
+        required
+      />
+
+      <label for="contrasena">Contraseña</label>
+      <input
+        type="password"
+        id="contrasena"
+        [(ngModel)]="password"
+        name="password"
+        placeholder="********"
+        required
+      />
+
+      <label for="confirmar">Confirmar contraseña</label>
+      <input
+        type="password"
+        id="confirmar"
+        [(ngModel)]="confirmPassword"
+        name="confirmPassword"
+        placeholder="********"
+        required
+      />
+
+      <button type="submit" class="btn-registrar">Registrar</button>
+    </form>
+
+    <p class="link">
+      ¿Ya Tienes Una Cuenta? | <a routerLink="/login">Inicia Sesión</a>
+    </p>
+  </div>
+</div>

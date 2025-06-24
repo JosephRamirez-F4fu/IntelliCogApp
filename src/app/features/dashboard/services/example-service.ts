@@ -14,10 +14,9 @@ interface Example {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ExampleService {
-
   private httpService: HttpService = inject(HttpService);
 
   create(example: Example): Observable<Example> {
@@ -25,7 +24,7 @@ export class ExampleService {
   }
 
   getById(exampleId: string): Observable<Example> {
-    return this.httpService.get(EndPoints.EXAMPLES + '/' + exampleId)
+    return this.httpService.get(EndPoints.EXAMPLES + '/' + exampleId);
   }
 
   getAll(): Observable<Example[]> {
@@ -33,14 +32,10 @@ export class ExampleService {
   }
 
   update(exampleId: string, example: Example): Observable<Example> {
-    return this.httpService
-      .successful()
-      .put(EndPoints.EXAMPLES + '/' + exampleId, example);
+    return this.httpService.put(EndPoints.EXAMPLES + '/' + exampleId, example);
   }
 
   delete(exampleId: string): Observable<Example> {
-    return this.httpService
-      .successful()
-      .delete(EndPoints.EXAMPLES + '/' + exampleId);
+    return this.httpService.delete(EndPoints.EXAMPLES + '/' + exampleId);
   }
 }

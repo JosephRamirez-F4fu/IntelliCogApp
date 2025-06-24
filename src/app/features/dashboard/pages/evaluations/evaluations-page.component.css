@@ -1,0 +1,188 @@
+.actions-bar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 18px;
+}
+
+.filters {
+    display: flex;
+    gap: 14px;
+    margin: 18px 0 10px 0;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.filters input,
+.filters select {
+    padding: 10px 14px;
+    border: 1px solid #bfc4d1;
+    border-radius: 8px;
+    font-size: 15px;
+    background: #f7f8fa;
+    transition: border 0.2s;
+}
+
+.filters input:focus,
+.filters select:focus {
+    border-color: #5a67d8;
+    outline: none;
+}
+
+.btn {
+    background: linear-gradient(90deg, #5a67d8 60%, #667eea 100%);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 22px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(90, 103, 216, 0.08);
+    transition: background 0.2s, box-shadow 0.2s;
+}
+
+.btn:hover {
+    background: linear-gradient(90deg, #667eea 60%, #5a67d8 100%);
+    box-shadow: 0 4px 16px rgba(90, 103, 216, 0.15);
+}
+
+.btn.filter {
+    width: 110px;
+}
+
+.btn.small {
+    font-size: 13px;
+    padding: 5px 12px;
+    margin: 2px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(90, 103, 216, 0.04);
+}
+
+th,
+td {
+    padding: 12px 10px;
+    border-bottom: 1px solid #e2e8f0;
+    text-align: left;
+    font-size: 15px;
+}
+
+th {
+    background: #f3f6fd;
+    font-weight: 600;
+    color: #3543b1;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+.empty-msg {
+    text-align: center;
+    color: #888;
+    margin: 32px 0 16px 0;
+    font-size: 1.1rem;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    margin-top: 18px;
+    font-size: 14px;
+}
+
+.pagination-info {
+    font-size: 13px;
+    color: #555;
+    margin-left: 12px;
+}
+
+@media (max-width: 900px) {
+    .filters {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    th,
+    td {
+        font-size: 13px;
+        padding: 8px 6px;
+    }
+
+    .pagination {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+}
+
+.header {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 18px;
+    color: #3543b1;
+    text-align: center;
+}
+
+.patient-search-bar {
+    margin: 18px 0 12px 0;
+    max-width: 400px;
+    position: relative;
+}
+
+.patient-search-bar input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1.5px solid #bfc4d1;
+    border-radius: 8px;
+    font-size: 15px;
+    background: #f7f8fa;
+}
+
+.patients-list {
+    position: absolute;
+    width: 100%;
+    background: #fff;
+    border: 1px solid #bfc4d1;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(90, 103, 216, 0.13);
+    z-index: 10;
+    max-height: 180px;
+    overflow-y: auto;
+}
+
+.patient-item {
+    padding: 8px 14px;
+    cursor: pointer;
+    transition: background 0.2s;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.patient-item:last-child {
+    border-bottom: none;
+}
+
+.patient-item:hover,
+.patient-item.selected {
+    background: #e2e8f0;
+    color: #3543b1;
+    font-weight: 600;
+}
+
+.patient-info {
+    background: #f7f8fa;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 18px;
+    font-size: 1.1rem;
+
+}

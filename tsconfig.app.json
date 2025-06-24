@@ -8,7 +8,7 @@
   },
   "include": [
     "src/**/*.ts"
-  ],
+, "src/app/components/overlay/overlay.servicets"  ],
   "exclude": [
     "src/**/*.spec.ts"
   ]

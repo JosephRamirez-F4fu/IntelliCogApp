@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
 }
@@ -18,4 +19,51 @@ body {
 hr {
   margin: 10px 0 30px;
   border: 0.5px solid #000;
+}
+
+.spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid #fff;
+  border-top: 3px solid #5a67d8;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.modal-overlay {
+  background: transparent;
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: 8px;
+  padding: 32px 24px;
+  min-width: 320px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
+  text-align: center;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.btn.delete {
+  background: #e53e3e;
+  color: #fff;
+}
+
+.btn.cancel {
+  background: #e2e8f0;
+  color: #333;
 }

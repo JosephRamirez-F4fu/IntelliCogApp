@@ -7,7 +7,8 @@
     "paths": {
       "@env/*": ["environments/*"],
       "@common/*": ["app/common/*"],
-      "@core/*": ["app/core/*"]
+      "@core/*": ["app/core/*"],
+      "@components/*": ["app/components/*"],
     },
     "strict": true,
     "noImplicitOverride": true,

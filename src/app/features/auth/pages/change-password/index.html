@@ -1,0 +1,32 @@
+<div class="recover-container">
+  <h2>Cambiar contraseña</h2>
+  <form (ngSubmit)="resetPassword()" #f="ngForm">
+    <label for="newPassword">Nueva contraseña</label>
+    <input
+      id="newPassword"
+      name="newPassword"
+      type="password"
+      [(ngModel)]="newPassword"
+      required
+    />
+    <label for="confirmPassword">Confirmar contraseña</label>
+    <input
+      id="confirmPassword"
+      name="confirmPassword"
+      type="password"
+      [(ngModel)]="confirmPassword"
+      required
+    />
+    <button
+      type="submit"
+      [disabled]="!token || !newPassword || !confirmPassword || loading"
+    >
+      Cambiar contraseña
+    </button>
+  </form>
+  <div *ngIf="message" class="msg">{{ message }}</div>
+  <div class="actions">
+    <a routerLink="/login">Volver al login</a>
+    <a routerLink="/send-code">Volver al código</a>
+  </div>
+</div>

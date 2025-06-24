@@ -1,0 +1,173 @@
+.card.evaluation-detail-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(90, 103, 216, 0.07);
+    padding: 32px 24px 24px 24px;
+    margin: 32px auto;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.form-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #3543b1;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.patient-info {
+    font-size: 1.1rem;
+    color: #3543b1;
+    margin-bottom: 18px;
+    text-align: center;
+}
+
+.main-actions {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
+.btn.secondary {
+    background: #e2e8f0;
+    color: #3543b1;
+}
+
+.btn.secondary:hover {
+    background: #c3c8e6;
+}
+
+.section-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #3543b1;
+    margin: 18px 0 10px 0;
+    text-align: left;
+}
+
+.mri-image-large {
+    margin: 18px 0;
+    text-align: center;
+}
+
+.mri-img-large {
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(90, 103, 216, 0.13);
+    max-width: 100%;
+    width: 650px;
+    height: auto;
+}
+
+.form-section {
+    margin-bottom: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+input,
+select,
+textarea {
+    padding: 10px 14px;
+    border: 1px solid #bfc4d1;
+    border-radius: 8px;
+    font-size: 15px;
+    background: #f7f8fa;
+    transition: border 0.2s;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #5a67d8;
+    outline: none;
+}
+
+label {
+    font-weight: 500;
+    color: #3543b1;
+}
+
+.btn {
+    background: linear-gradient(90deg, #5a67d8 60%, #667eea 100%);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 22px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(90, 103, 216, 0.08);
+    transition: background 0.2s, box-shadow 0.2s;
+    margin-top: 8px;
+}
+
+.btn.primary {
+    background: linear-gradient(90deg, #3543b1 60%, #5a67d8 100%);
+}
+
+.btn:hover {
+    background: linear-gradient(90deg, #667eea 60%, #5a67d8 100%);
+    box-shadow: 0 4px 16px rgba(90, 103, 216, 0.15);
+}
+
+.model-result {
+    background-color: #f0f8ff;
+    border-left: 4px solid #0d6efd;
+    padding: 16px 20px;
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.model-result h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #0d6efd;
+    font-weight: 600;
+}
+
+.model-result p {
+    margin: 4px 0;
+    font-size: 15px;
+    color: #333;
+}
+
+.model-result b {
+    color: #000;
+}
+
+@media (max-width: 700px) {
+    .card.evaluation-detail-card {
+        padding: 16px 6px;
+        max-width: 98vw;
+    }
+
+    .mri-img-large {
+        width: 98vw;
+        max-width: 98vw;
+    }
+}
+
+.manual-classification-form select,
+.nota-form textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 14px;
+    border: 1.5px solid #bfc4d1;
+    border-radius: 8px;
+    font-size: 15px;
+    background: #f7f8fa;
+    margin-bottom: 8px;
+    transition: border 0.2s;
+}
+
+/* El textarea no se puede redimensionar */
+.nota-form textarea {
+    resize: none;
+    min-height: 90px;
+}

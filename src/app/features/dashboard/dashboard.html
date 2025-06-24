@@ -5,19 +5,35 @@
       <h2>IntelliCog</h2>
     </div>
     <nav>
-      <a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">🏠 Inicio</a>
-      <a routerLink="/dashboard/gestion-pacientes" routerLinkActive="active">👥 Gestión de pacientes</a>
-      <a routerLink="/dashboard/datos-clinicos" routerLinkActive="active">📋 Datos clínicos</a>
-      <a routerLink="/dashboard/clasificacion" routerLinkActive="active">🧠 Clasificación</a>
-      <a routerLink="/dashboard/reportes" routerLinkActive="active">📊 Reportes</a>
-      <a routerLink="/dashboard/guia-de-uso" routerLinkActive="active">📘 Guía de uso</a>
-      <a routerLink="/dashboard/soporte" routerLinkActive="active">🛠️ Soporte técnico</a>
+      <a
+        routerLink="/dashboard"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        >🏠 Inicio</a
+      >
+      <a routerLink="/dashboard/gestion-pacientes" routerLinkActive="active"
+        >👥 Gestión de pacientes</a
+      >
+      <a routerLink="/dashboard/evaluaciones" routerLinkActive="active"
+        >📋 Evaluaciones</a
+      >
+      <a routerLink="/dashboard/analisis-resultados" routerLinkActive="active"
+        >🧠 Analisis de Resultados</a
+      >
+      <a routerLink="/dashboard/reportes" routerLinkActive="active"
+        >📊 Reportes</a
+      >
+      <a routerLink="/dashboard/guia-de-uso" routerLinkActive="active"
+        >📘 Guía de uso</a
+      >
+      <a routerLink="/dashboard/soporte" routerLinkActive="active"
+        >🛠️ Soporte técnico</a
+      >
       <a routerLink="/login">🔓 Cerrar sesión</a>
     </nav>
-
   </aside>
 
   <main class="main">
-    <router-outlet/>
+    <router-outlet />
   </main>
 </div>

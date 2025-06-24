@@ -1,0 +1,142 @@
+.filters {
+    display: flex;
+    align-items: flex-end;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.input-autocomplete-wrapper {
+    position: relative;
+    width: 220px;
+}
+
+.patient-input {
+    width: 100%;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1.5px solid #bfc4d1;
+    font-size: 15px;
+    background: #f7f8fa;
+    box-sizing: border-box;
+}
+
+.patients-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    border: 1px solid #bfc4d1;
+    border-radius: 0 0 6px 6px;
+    box-shadow: 0 2px 8px rgba(90, 103, 216, 0.13);
+    z-index: 10;
+    max-height: 180px;
+    overflow-y: auto;
+}
+
+.patient-item {
+    padding: 8px 14px;
+    cursor: pointer;
+    transition: background 0.2s;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.patient-item:last-child {
+    border-bottom: none;
+}
+
+.patient-item:hover {
+    background: #e2e8f0;
+    color: #3543b1;
+    font-weight: 600;
+}
+
+.clear-btn {
+    background: #e2e8f0;
+    color: #3543b1;
+    border: none;
+    border-radius: 6px;
+    padding: 7px 12px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.clear-btn:hover {
+    background: #c3c8e6;
+}
+
+.patient-info {
+    background: #f7f8fa;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 18px;
+    font-size: 1.1rem;
+    color: #3543b1;
+}
+
+.actions-bar {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 18px;
+    align-items: center;
+}
+
+.email-input {
+    padding: 7px 12px;
+    border-radius: 6px;
+    border: 1.5px solid #bfc4d1;
+    font-size: 15px;
+    background: #f7f8fa;
+    width: 220px;
+}
+
+.evaluations-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+}
+
+.evaluations-table th,
+.evaluations-table td {
+    padding: 8px 10px;
+    border-bottom: 1px solid #e2e8f0;
+    text-align: left;
+}
+
+.evaluations-table th {
+    background: #f0f4fa;
+    color: #3543b1;
+}
+
+.evaluations-table tr:last-child td {
+    border-bottom: none;
+}
+
+.btn {
+    background: #5a67d8;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 7px 14px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn.small {
+    padding: 5px 10px;
+    font-size: 13px;
+}
+
+.btn:hover {
+    background: #3543b1;
+}
+
+.empty-msg {
+    color: #888;
+    margin-top: 18px;
+    text-align: center;
+}

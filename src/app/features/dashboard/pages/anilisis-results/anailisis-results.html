@@ -1,0 +1,93 @@
+<h1 class="header">Reportes de Evaluaciones</h1>
+
+<div class="filters">
+  <div class="patient-search-group">
+    <label>
+      Paciente:
+      <div class="input-autocomplete-wrapper">
+        <input
+          type="text"
+          [(ngModel)]="patientSearch"
+          (input)="onPatientSearch()"
+          placeholder="Buscar por nombre o DNI"
+          autocomplete="off"
+          class="patient-input"
+        />
+        <div *ngIf="filteredPatients.length > 0" class="patients-list">
+          <div
+            class="patient-item"
+            *ngFor="let p of filteredPatients"
+            (click)="selectPatient(p)"
+          >
+            {{ p.name }} {{ p.last_name }} ({{ p.dni }})
+          </div>
+        </div>
+      </div>
+    </label>
+    <button
+      *ngIf="selectedPatient"
+      class="btn small clear-btn"
+      (click)="clearSelectedPatient()"
+      type="button"
+    >
+      Quitar selección
+    </button>
+  </div>
+  <label>
+    Sexo:
+    <select [(ngModel)]="sex" (change)="onFilterChange()">
+      <option value="">Todos</option>
+      <option value="MALE">Hombre</option>
+      <option value="FEMALE">Mujer</option>
+    </select>
+  </label>
+  <label>
+    Tipo de Evaluación:
+    <select [(ngModel)]="modality" (change)="onFilterChange()">
+      <option value="">Todas</option>
+      <option value="CNN">Resonancia Magnética</option>
+      <option value="RF">Datos Clínicos</option>
+    </select>
+  </label>
+  <label>
+    Edad mínima:
+    <input type="number" [(ngModel)]="minAge" (change)="onFilterChange()" />
+  </label>
+  <label>
+    Edad máxima:
+    <input type="number" [(ngModel)]="maxAge" (change)="onFilterChange()" />
+  </label>
+</div>
+
+<div style="max-width: 700px; margin: 0 auto">
+  <h3>Por tipo de resultado (Barras)</h3>
+  <canvas
+    baseChart
+    [data]="barChartData"
+    [options]="barChartOptions"
+    [type]="'bar'"
+  >
+  </canvas>
+</div>
+
+<div style="max-width: 500px; margin: 40px auto">
+  <h3>Por tipo de resultado (Torta)</h3>
+  <canvas
+    baseChart
+    [data]="pieChartData"
+    [options]="{ responsive: true }"
+    [type]="'pie'"
+  >
+  </canvas>
+</div>
+
+<div style="max-width: 700px; margin: 40px auto">
+  <h3>Evolución de evaluaciones en el tiempo</h3>
+  <canvas
+    baseChart
+    [data]="lineChartData"
+    [options]="{ responsive: true }"
+    [type]="'line'"
+  >
+  </canvas>
+</div>

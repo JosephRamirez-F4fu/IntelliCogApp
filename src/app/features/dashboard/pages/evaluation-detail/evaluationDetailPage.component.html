@@ -1,0 +1,128 @@
+<div class="card evaluation-detail-card">
+  <h2 class="form-title" *ngIf="evaluacion?.modality === 'CNN'">
+    Evaluación por Resonancia Magnética
+  </h2>
+  <h2 class="form-title" *ngIf="evaluacion?.modality === 'RF'">
+    Evaluación por Datos Clínicos
+  </h2>
+  <div class="patient-info" *ngIf="patient">
+    <b>Paciente:</b> {{ patient.name + " " + patient.last_name }}<br />
+    <b>DNI:</b> {{ patient.dni }}<br />
+  </div>
+
+  <div class="main-actions">
+    <button class="btn" (click)="ejecutarModelo()" *ngIf="evaluacion">
+      Ejecutar Detección
+    </button>
+    <button class="btn primary" (click)="guardarTodo()" [disabled]="loading">
+      Guardar
+    </button>
+    <button class="btn secondary" (click)="salir()">Salir</button>
+  </div>
+
+  <ng-container *ngIf="evaluacion?.modality === 'CNN'">
+    <h3 class="section-title">Imagen MRI</h3>
+    <input class="input" type="file" (change)="cargarImagen($event)" />
+    <div *ngIf="imagenUrl" class="mri-image-large">
+      <img [src]="imagenUrl" class="mri-img-large" />
+    </div>
+    <div
+      *ngIf="evaluacion.model_classification && evaluacion.model_probability"
+      class="model-result"
+    >
+      <h4>Resultado del Modelo</h4>
+      <p><b>Clasificación:</b> {{ mapresult(evaluacion) }}</p>
+      <p><b>Probabilidad:</b> {{ evaluacion.model_probability | percent }}</p>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="evaluacion?.modality === 'RF'">
+    <h3 class="section-title">Datos Clínicos</h3>
+    <form [formGroup]="clinicForm" class="form-section clinic-form">
+      <label>Escala de Actividades Diarias</label>
+      <input
+        class="input"
+        formControlName="adl"
+        placeholder="ADL"
+        type="number"
+      />
+      <label>Potasio en Sangre</label>
+      <input
+        class="input"
+        formControlName="potassium"
+        placeholder="Potasio"
+        type="number"
+      />
+      <label>Resultado del Test Estatico-Dinamico (BERG)</label>
+      <input
+        class="input"
+        formControlName="berg"
+        placeholder="Berg"
+        type="number"
+      />
+      <label>Vitamina D</label>
+      <input
+        class="input"
+        formControlName="vitamin_d"
+        placeholder="Vitamina D"
+        type="number"
+      />
+      <label>Vitamina B12</label>
+      <input
+        class="input"
+        formControlName="vit_b12"
+        placeholder="Vitamina B12"
+        type="number"
+      />
+      <label>Estres en los Últimos 2 años</label>
+      <label class="checkbox-label">
+        <input type="checkbox" formControlName="stress" /> Sí
+      </label>
+    </form>
+    <div
+      *ngIf="evaluacion.model_classification && evaluacion.model_probability"
+      class="model-result"
+    >
+      <h4>Resultado del Modelo</h4>
+      <p><b>Clasificación:</b> {{ mapresult(evaluacion) }}</p>
+      <p><b>Probabilidad:</b> {{ evaluacion.model_probability | percent }}</p>
+    </div>
+  </ng-container>
+  <div class="form-section manual-classification-form">
+    <h3 class="section-title">Clasificación Manual</h3>
+    <form [formGroup]="manualForm">
+      <select
+        class="input"
+        formControlName="manual_classification"
+        *ngIf="evaluacion.modality === 'RF'"
+      >
+        <option value="" disabled selected>Seleccione su clasificación</option>
+        <option value="Normal">Normal</option>
+        <option value="MCI + DEMENTIA">
+          Deterioro Congnitivo Leve o Demencia
+        </option>
+      </select>
+      <select
+        class="input"
+        formControlName="manual_classification"
+        *ngIf="evaluacion.modality === 'CNN'"
+      >
+        <option value="" disabled selected>Selecciona su clasificación</option>
+        <option value="Normal">Normal</option>
+        <option value="Mild Dementia">Demencia Leve</option>
+        <option value="Moderate Dementia">Demencia Moderada</option>
+        <option value="Severe Dementia">Demencia Severa</option>
+      </select>
+    </form>
+  </div>
+  <div class="form-section nota-form">
+    <h3 class="section-title">Notas</h3>
+    <form [formGroup]="notaForm">
+      <textarea
+        class="input"
+        formControlName="description"
+        placeholder="Notas clínicas"
+      ></textarea>
+    </form>
+  </div>
+</div>

@@ -1,58 +1,88 @@
-<header class="header">
-  <h1>Pacientes</h1>
-  <div class="user-info">
-    <span class="user-icon">👤</span>
-    <span>Juan Pérez</span>
-  </div>
-</header>
-
-<div class="filters">
-  <select>
-    <option>Todos</option>
-    <option>Control</option>
-    <option>MCI</option>
-    <option>Demencia</option>
-  </select>
-  <input type="date"/>
-  <input type="text" placeholder="DNI"/>
-  <button class="btn filter">Filtrar</button>
+<h1 class="header">Gestión de Pacientes</h1>
+<app-user-link></app-user-link>
+<div class="actions-bar">
+  <button class="btn" (click)="openCreatePatientOverlay()">
+    Crear Paciente
+  </button>
 </div>
 
-<table class="patients-table">
-  <thead>
-  <tr>
-    <th>DNI</th>
-    <th>Nombre</th>
-    <th>Edad</th>
-    <th>Fecha de evaluación</th>
-    <th>Estado cognitivo</th>
-    <th>Acciones</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr>
-    <td>84494526</td>
-    <td>Sofía García</td>
-    <td>40</td>
-    <td>20/02/2024</td>
-    <td><span class="badge control">Control</span></td>
-    <td>
-      <button class="btn small" [routerLink]="['/dashboard/gestion-pacientes/historial', '1']">Editar</button>
-      <button class="btn small danger">Eliminar</button>
-    </td>
-  </tr>
-  <tr>
-    <td>84494526</td>
-    <td>Sofía García</td>
-    <td>40</td>
-    <td>20/02/2024</td>
-    <td><span class="badge control">Control</span></td>
-    <td>
-      <button class="btn small" [routerLink]="['/dashboard/gestion-pacientes/historial', '1']">Editar</button>
-      <button class="btn small danger">Eliminar</button>
-    </td>
-  </tr>
-  </tbody>
-</table>
+<section class="card">
+  <div class="filters">
+    <input
+      [(ngModel)]="filterName"
+      placeholder="Filtrar por nombre o apellido"
+      name="filterName"
+    />
+    <input
+      [(ngModel)]="filterDni"
+      placeholder="Filtrar por DNI"
+      name="filterDni"
+    />
+    <button class="btn filter" (click)="applyFilters()">Filtrar</button>
+    <button class="btn small" (click)="clearFilters()">Limpiar</button>
+  </div>
+  <div class="pagination">
+    <div class="pagination-info">
+      Mostrando {{ filteredPatientsList.length }} de {{ totalPatients }}
+      pacientes
+    </div>
+  </div>
+  <div class="table-responsive">
+    <table class="patients-table">
+      <thead>
+        <tr>
+          <th>DNI</th>
+          <th>Nombre Completo</th>
+          <th>Sexo</th>
+          <th>Edad</th>
+          <th>Años Educación</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let patient of filteredPatientsList">
+          <td>{{ patient.dni }}</td>
+          <td>{{ patient.name }} {{ patient.last_name }}</td>
+          <td>
+            <span
+              [ngClass]="{'badge male': patient.sex === 'MALE', 'badge female': patient.sex === 'FEMALE'}"
+            >
+              {{ patient.sex === 'MALE' ? 'Hombre' : 'Mujer' }}
+            </span>
+          </td>
+          <td>{{ patient.age }}</td>
+          <td>{{ patient.age_education || '-' }}</td>
+          <td>
+            <button class="btn small" (click)="editPatient(patient)">
+              Editar
+            </button>
+            <button class="btn danger small" (click)="deletePatient(patient)">
+              Eliminar
+            </button>
+            <button class="btn small" (click)="goToHistorial(patient)">
+              Ir a historial
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-<div class="pagination">1-8 de 8 &lt; 1 &gt;</div>
+  <div class="pagination" *ngIf="totalPatients > pageSize">
+    <button
+      class="btn small"
+      [disabled]="page === 1"
+      (click)="onPageChange(page - 1)"
+    >
+      Anterior
+    </button>
+    <span>Página {{ page }} de {{ totalPages() }}</span>
+    <button
+      class="btn small"
+      [disabled]="page === totalPages()"
+      (click)="onPageChange(page + 1)"
+    >
+      Siguiente
+    </button>
+  </div>
+</section>

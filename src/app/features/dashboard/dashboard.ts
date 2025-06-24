@@ -4,13 +4,8 @@ import { NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [
-    RouterModule,
-    NgOptimizedImage
-  ],
+  imports: [RouterModule, NgOptimizedImage],
   templateUrl: './dashboard.html',
-  styleUrl: './dashboard.css'
+  styleUrl: './dashboard.css',
 })
-export class Dashboard {
-
-}
+export class Dashboard {}

@@ -1,0 +1,24 @@
+<div class="recover-container">
+  <h2>Verificar código</h2>
+  <form (ngSubmit)="verifyCode()" #f="ngForm">
+    <label for="code">Código recibido</label>
+    <input id="code" name="code" type="text" [(ngModel)]="code" required />
+    <button type="submit" [disabled]="!email || !code || loading">
+      Verificar
+    </button>
+  </form>
+  <button
+    type="button"
+    class="resend-btn"
+    (click)="resendCode()"
+    [disabled]="loading || resendLoading"
+  >
+    Reenviar código
+  </button>
+  <div *ngIf="message" class="msg">{{ message }}</div>
+  <div class="actions">
+    <a routerLink="/login">Volver al login</a>
+    <a routerLink="/recover-password">Cambiar correo</a>
+  </div>
+  <div *ngIf="resendMessage" class="msg">{{ resendMessage }}</div>
+</div>

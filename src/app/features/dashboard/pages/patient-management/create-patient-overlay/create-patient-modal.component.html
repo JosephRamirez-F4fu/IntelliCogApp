@@ -1,0 +1,29 @@
+<form [formGroup]="form" (ngSubmit)="submit()" class="modal-form">
+  <h3>Crear Paciente</h3>
+  <input class="input" formControlName="dni" placeholder="DNI" />
+  <input class="input" formControlName="name" placeholder="Nombres" />
+  <input class="input" formControlName="last_name" placeholder="Apellidos" />
+  <select class="input" formControlName="sex">
+    <option value="" disabled selected>Sexo</option>
+    <option value="MALE">Masculino</option>
+    <option value="FEMALE">Femenino</option>
+  </select>
+  <input class="input" formControlName="age" type="number" placeholder="Edad" />
+  <input
+    class="input"
+    formControlName="age_education"
+    type="number"
+    placeholder="Años de educación"
+  />
+  <div class="form-row">
+    <label class="checkbox-label">
+      <input type="checkbox" formControlName="hipertension" />
+      Hipertensión
+    </label>
+    <!-- Puedes añadir más comorbilidades aquí -->
+  </div>
+  <div class="modal-actions">
+    <button type="submit" [disabled]="form.invalid">Crear</button>
+    <button type="button" (click)="cancel()">Cancelar</button>
+  </div>
+</form>

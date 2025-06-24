@@ -1,0 +1,107 @@
+<h1 class="header">Reportes</h1>
+
+<div class="filters">
+  <label>
+    Paciente:
+    <div class="input-autocomplete-wrapper">
+      <input
+        type="text"
+        [(ngModel)]="patientSearch"
+        (input)="onPatientSearch()"
+        placeholder="Buscar por nombre o DNI"
+        autocomplete="off"
+        class="patient-input"
+      />
+      <div *ngIf="filteredPatients.length > 0" class="patients-list">
+        <div
+          class="patient-item"
+          *ngFor="let p of filteredPatients"
+          (click)="selectPatient(p)"
+        >
+          {{ p.name }} {{ p.last_name }} ({{ p.dni }})
+        </div>
+      </div>
+    </div>
+  </label>
+  <button
+    *ngIf="selectedPatient"
+    class="btn small clear-btn"
+    (click)="clearSelectedPatient()"
+    type="button"
+  >
+    Quitar selección
+  </button>
+</div>
+
+<div *ngIf="selectedPatient" class="patient-info">
+  <b>Paciente:</b> {{ selectedPatient.name }} {{ selectedPatient.last_name }}<br />
+  <b>DNI:</b> {{ selectedPatient.dni }}<br />
+  <b>Edad:</b> {{ selectedPatient.age || '-' }}<br />
+  <b>Sexo:</b> {{ selectedPatient.sex === 'MALE' ? 'Hombre' : 'Mujer' }}
+</div>
+
+<div *ngIf="selectedPatient">
+  <div class="actions-bar">
+    <button
+      class="btn"
+      (click)="downloadAll()"
+      [disabled]="!evaluations.length || loading"
+    >
+      Descargar historial PDF
+    </button>
+    <input
+      type="email"
+      [(ngModel)]="emailToSend"
+      placeholder="Correo para enviar PDF"
+      class="email-input"
+    />
+    <button
+      class="btn"
+      (click)="sendAllByEmail()"
+      [disabled]="!emailToSend || !evaluations.length || sending"
+    >
+      Enviar historial por correo
+    </button>
+  </div>
+
+  <table *ngIf="evaluations.length > 0" class="evaluations-table">
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Tipo</th>
+        <th>Resultado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let eval of evaluations">
+        <td>{{ eval.created_at | date : "dd/MM/yyyy HH:mm" }}</td>
+        <td>
+          {{ eval.modality === 'CNN' ? 'Resonancia Magnética' : 'Datos Clínicos'
+          }}
+        </td>
+        <td>
+          {{ eval.model_classification || 'Sin resultado' }}
+          <span *ngIf="eval.model_probability"
+            >({{ eval.model_probability | percent }})</span
+          >
+        </td>
+        <td>
+          <button class="btn small" (click)="downloadOne(eval)">
+            Descargar PDF
+          </button>
+          <button
+            class="btn small"
+            (click)="sendOneByEmail(eval)"
+            [disabled]="!emailToSend || sending"
+          >
+            Enviar por correo
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="!evaluations.length && !loading" class="empty-msg">
+    No hay evaluaciones para este paciente.
+  </div>
+</div>

@@ -1,0 +1,88 @@
+<h1 class="header">Historial de Evaluaciones</h1>
+<app-user-link></app-user-link>
+
+<div class="patient-search-bar">
+  <input
+    [(ngModel)]="searchTerm"
+    (input)="onSearchPatient()"
+    placeholder="Buscar paciente por nombre o DNI"
+    name="searchPatient"
+    autocomplete="off"
+  />
+  <div *ngIf="patients.length > 0" class="patients-list">
+    <div
+      class="patient-item"
+      *ngFor="let patient of patients"
+      (click)="selectPatient(patient)"
+      [class.selected]="selectedPatient?.dni === patient.dni"
+    >
+      {{ patient.name }} {{ patient.last_name }} ({{ patient.dni }})
+    </div>
+  </div>
+</div>
+
+<div *ngIf="selectedPatient" class="patient-info">
+  <b>Paciente:</b> {{ selectedPatient.name }} {{ selectedPatient.last_name
+  }}<br />
+  <b>DNI:</b> {{ selectedPatient.dni }}<br />
+  <b>Edad:</b> {{ selectedPatient.age || "-" }}<br />
+  <b>Sexo:</b> {{ selectedPatient.sex === "MALE" ? "Hombre" : "Mujer" }}
+</div>
+
+<div class="actions-bar">
+  <button
+    class="btn"
+    (click)="openCreateOverlay()"
+    [disabled]="!selectedPatient"
+  >
+    Crear Evaluación
+  </button>
+  <button
+    class="btn small"
+    (click)="clearSelectedPatient()"
+    *ngIf="selectedPatient"
+  >
+    Cambiar Paciente
+  </button>
+</div>
+
+<table *ngIf="evaluaciones.length > 0">
+  <thead>
+    <tr>
+      <th>Dado en</th>
+      <th>Tipo</th>
+      <th>Resultado</th>
+      <th>Clasificación Manual</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let eval of evaluaciones">
+      <td>
+        {{ eval.created_at | date : "dd/MM/yyyy HH:mm" }}
+      </td>
+      <td>{{ mapModality(eval.modality) }}</td>
+      <td>
+        {{ mapresult(eval) }} ({{ eval.model_probability || 0 | percent }})
+      </td>
+      <td>{{ mapresult(eval) || "Sin clasificar" }}</td>
+      <td>
+        <button
+          class="btn small"
+          [routerLink]="['/dashboard/evaluaciones/', eval.id]"
+        >
+          Detalle
+        </button>
+        <button class="btn danger small" (click)="eliminarEvaluacion(eval.id)">
+          Eliminar
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div
+  *ngIf="selectedPatient && !evaluaciones.length && !loading"
+  class="empty-msg"
+>
+  No hay evaluaciones para este paciente.
+</div>

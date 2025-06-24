@@ -1,30 +1,24 @@
 <div class="logo-central">
-  <img src="brain-icon.png" alt="IntelliCog Icon" />
+  <img
+    ngSrc="/images/logo.jpeg"
+    width="200"
+    height="100"
+    alt="IntelliCog Icon"
+  />
+  <h1>Guía de Uso</h1>
 </div>
 
-<ul class="guia-lista">
-  <li>
-    <img src="icono-usuario.png" alt="Registrar" />
-    <span>Registrar paciente</span>
-  </li>
-  <li>
-    <img src="icono-clinica.png" alt="Variables clínicas" />
-    <span>Ingresar variables clínicas</span>
-  </li>
-  <li>
-    <img src="icono-clasificar.png" alt="Clasificación" />
-    <span>Ejecutar clasificación</span>
-  </li>
-  <li>
-    <img src="icono-resultados.png" alt="Resultados" />
-    <span>Ver resultados de predicción</span>
-  </li>
-  <li>
-    <img src="icono-variable.png" alt="Variables influyentes" />
-    <span>Visualizar variables más influyentes</span>
-  </li>
-  <li>
-    <img src="icono-pdf.png" alt="PDF" />
-    <span>Generar reporte en PDF</span>
-  </li>
-</ul>
+<div class="guia-acordeon">
+  <div class="acordeon-item" *ngFor="let seccion of secciones; let i = index">
+    <div class="acordeon-header" (click)="toggle(i)">
+      <img [src]="seccion.img" width="60" height="60" [alt]="seccion.alt" />
+      <span class="guia-titulo">{{ seccion.titulo }}</span>
+      <span class="acordeon-arrow">{{ opened[i] ? '▲' : '▼' }}</span>
+    </div>
+    <div class="acordeon-body" [class.open]="opened[i]">
+      <ol>
+        <li *ngFor="let paso of seccion.pasos" [innerHTML]="paso"></li>
+      </ol>
+    </div>
+  </div>
+</div>

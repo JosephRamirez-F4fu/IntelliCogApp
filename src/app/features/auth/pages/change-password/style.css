@@ -1,0 +1,112 @@
+.recover-container {
+    background-color: white;
+    padding: 40px 50px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(90, 103, 216, 0.13);
+    margin: 60px auto;
+}
+
+.recover-container h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 18px;
+    color: #3543b1;
+}
+
+label {
+    display: block;
+    text-align: left;
+    margin: 10px 0 5px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+input[type="email"],
+input[type="text"],
+input[type="password"] {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1.5px solid #bfc4d1;
+    font-size: 15px;
+    background-color: #f3f3f3;
+    width: 100%;
+    margin-bottom: 12px;
+    transition: border 0.2s;
+}
+
+input:focus {
+    border-color: #5a67d8;
+    outline: none;
+}
+
+button[type="submit"],
+.actions button[type="button"] {
+    width: 100%;
+    background-color: #5a67d8;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(90, 103, 216, 0.13);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover,
+.actions button[type="button"]:hover {
+    background-color: #434190;
+}
+
+button[disabled] {
+    background-color: #bfc4d1 !important;
+    color: #fff !important;
+    cursor: not-allowed;
+}
+
+.msg {
+    margin-top: 12px;
+    color: #3543b1;
+    text-align: center;
+    font-size: 15px;
+}
+
+.actions {
+    margin-top: 18px;
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.actions a,
+.actions button[type="button"] {
+    color: #3b49df;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 15px;
+    padding: 0;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.actions a:hover,
+.actions button[type="button"]:hover {
+    color: #3543b1;
+    text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+    .recover-container {
+        padding: 18px 8px;
+        max-width: 98vw;
+    }
+}

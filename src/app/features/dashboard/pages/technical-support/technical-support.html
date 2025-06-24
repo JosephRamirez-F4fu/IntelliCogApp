@@ -1,15 +1,22 @@
 <h1>Soporte técnico</h1>
 <p>
-  Si necesitas ayuda, por favor completa el formulario y un miembro de nuestro equipo
-  te contactará a la brevedad.
+  Si necesitas ayuda, por favor completa el formulario y un miembro de nuestro
+  equipo te contactará a la brevedad.
 </p>
 
-<form class="formulario">
+<form class="formulario" (submit)="onSubmit($event)">
   <label for="titulo">Nombre de Consulta</label>
-  <input type="text" id="titulo" placeholder="" />
+  <input type="text" id="titulo" [(ngModel)]="titulo" name="titulo" />
 
   <label for="descripcion">Descripción</label>
-  <textarea id="descripcion" rows="6"></textarea>
+  <textarea
+    id="descripcion"
+    rows="6"
+    [(ngModel)]="descripcion"
+    name="descripcion"
+  ></textarea>
 
-  <button type="submit" class="btn">Enviar</button>
+  <button type="submit" class="btn" [disabled]="loading">
+    {{ loading ? 'Enviando...' : 'Enviar' }}
+  </button>
 </form>

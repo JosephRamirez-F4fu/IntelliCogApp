@@ -4,6 +4,10 @@ export interface AppError {
   code: number;
 }
 
-export interface User {
-
+export interface NotifyOptions {
+  success?: string;
+  error?: string;
+  successType?: 'success' | 'info' | 'warning';
+  errorType?: 'error' | 'warning' | 'info';
+  duration?: number;
 }
