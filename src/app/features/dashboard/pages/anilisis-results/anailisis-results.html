@@ -16,7 +16,7 @@
         <div *ngIf="filteredPatients.length > 0" class="patients-list">
           <div
             class="patient-item"
-            *ngFor="let p of filteredPatients"
+            *ngFor="let p of filteredPatients; trackBy: trackByDni"
             (click)="selectPatient(p)"
           >
             {{ p.name }} {{ p.last_name }} ({{ p.dni }})
@@ -33,6 +33,7 @@
       Quitar selección
     </button>
   </div>
+
   <label>
     Sexo:
     <select [(ngModel)]="sex" (change)="onFilterChange()">
@@ -41,6 +42,7 @@
       <option value="FEMALE">Mujer</option>
     </select>
   </label>
+
   <label>
     Tipo de Evaluación:
     <select [(ngModel)]="modality" (change)="onFilterChange()">
@@ -49,45 +51,46 @@
       <option value="RF">Datos Clínicos</option>
     </select>
   </label>
+
   <label>
     Edad mínima:
-    <input type="number" [(ngModel)]="minAge" (change)="onFilterChange()" />
+    <input type="number" [(ngModel)]="minAge" (change)="onFilterChange()" placeholder="Desde..." />
   </label>
+
   <label>
     Edad máxima:
-    <input type="number" [(ngModel)]="maxAge" (change)="onFilterChange()" />
+    <input type="number" [(ngModel)]="maxAge" (change)="onFilterChange()" placeholder="Hasta..." />
   </label>
 </div>
 
-<div style="max-width: 700px; margin: 0 auto">
+<p class="results-count">Mostrando {{ evaluations.length }} evaluaciones</p>
+
+<div class="chart-container">
   <h3>Por tipo de resultado (Barras)</h3>
   <canvas
     baseChart
     [data]="barChartData"
     [options]="barChartOptions"
     [type]="'bar'"
-  >
-  </canvas>
+  ></canvas>
 </div>
 
-<div style="max-width: 500px; margin: 40px auto">
+<div class="chart-container">
   <h3>Por tipo de resultado (Torta)</h3>
   <canvas
     baseChart
     [data]="pieChartData"
     [options]="{ responsive: true }"
     [type]="'pie'"
-  >
-  </canvas>
+  ></canvas>
 </div>
 
-<div style="max-width: 700px; margin: 40px auto">
+<div class="chart-container">
   <h3>Evolución de evaluaciones en el tiempo</h3>
   <canvas
     baseChart
     [data]="lineChartData"
     [options]="{ responsive: true }"
     [type]="'line'"
-  >
-  </canvas>
+  ></canvas>
 </div>

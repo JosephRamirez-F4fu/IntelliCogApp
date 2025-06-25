@@ -49,19 +49,24 @@
     >
       Descargar historial PDF
     </button>
-    <input
-      type="email"
-      [(ngModel)]="emailToSend"
-      placeholder="Correo para enviar PDF"
-      class="email-input"
-    />
-    <button
-      class="btn"
-      (click)="sendAllByEmail()"
-      [disabled]="!emailToSend || !evaluations.length || sending"
-    >
-      Enviar historial por correo
-    </button>
+<input
+  type="email"
+  [(ngModel)]="emailToSend"
+  placeholder="Correo para enviar PDF"
+  class="email-input"
+  [class.invalid]="emailToSend "
+/>
+<div *ngIf="!emailToSend " class="msg-error">
+  Ingresa un correo válido.
+</div>
+
+<button
+  class="btn"
+  (click)="sendAllByEmail()"
+  [disabled]="!evaluations.length || sending "
+>
+  Enviar historial por correo
+</button>
   </div>
 
   <table *ngIf="evaluations.length > 0" class="evaluations-table">

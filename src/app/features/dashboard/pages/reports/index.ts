@@ -9,12 +9,13 @@ import {
 } from '../../services/patient-management.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { SnackbarService } from '@core/services/snackbar-service';
 
 @Component({
   selector: 'app-reports',
   templateUrl: './index.html',
   styleUrls: ['./style.css'],
-  providers: [EvaluationsService, PatientManagementService],
+  providers: [EvaluationsService, PatientManagementService,SnackbarService],
   imports: [CommonModule, FormsModule],
 })
 export class Reports implements OnInit {
@@ -28,7 +29,8 @@ export class Reports implements OnInit {
 
   constructor(
     private evalService: EvaluationsService,
-    private patientService: PatientManagementService
+    private patientService: PatientManagementService,
+    private snackbar: SnackbarService
   ) {}
 
   ngOnInit(): void {}
@@ -37,6 +39,10 @@ export class Reports implements OnInit {
     const term = this.patientSearch.trim();
     if (term.length < 3) {
       this.filteredPatients = [];
+            if (term.length > 0) {
+        this.snackbar.show('Escribe al menos 3 caracteres para buscar.', 'warning');
+      }
+      
       return;
     }
     const isDni = /^\d+$/.test(term);
@@ -98,8 +104,19 @@ export class Reports implements OnInit {
       });
   }
 
-  sendAllByEmail() {
-    if (!this.selectedPatient || !this.emailToSend) return;
+ sendAllByEmail() {
+    if (!this.selectedPatient) {
+      this.snackbar.show('Selecciona un paciente.', 'error');
+      return;
+    }
+    if (!this.emailToSend ) {
+      this.snackbar.show('Introduce un correo válido.', 'error');
+      return;
+    }
+    if (!this.evaluations.length) {
+      this.snackbar.show('No hay evaluaciones para enviar.', 'info');
+      return;
+    }
     this.sending = true;
     this.evalService
       .sendPatientEvaluationPdfByEmail(
@@ -109,18 +126,25 @@ export class Reports implements OnInit {
       )
       .subscribe({
         next: () => {
-          alert('PDF enviado correctamente');
+          this.snackbar.show('PDF enviado correctamente.', 'success');
           this.sending = false;
         },
         error: () => {
-          alert('Error al enviar PDF');
+          this.snackbar.show('Error al enviar PDF.', 'error');
           this.sending = false;
         },
       });
   }
 
   sendOneByEmail(evaluation: EvaluationModel) {
-    if (!this.selectedPatient || !evaluation.id || !this.emailToSend) return;
+    if (!this.selectedPatient || !evaluation.id) {
+      this.snackbar.show('Selecciona un paciente y evaluación.', 'error');
+      return;
+    }
+    if (!this.emailToSend ) {
+      this.snackbar.show('Introduce un correo válido.', 'error');
+      return;
+    }
     this.sending = true;
     this.evalService
       .sendPatientEvaluationPdfByEmail(
@@ -130,11 +154,11 @@ export class Reports implements OnInit {
       )
       .subscribe({
         next: () => {
-          alert('PDF enviado correctamente');
+          this.snackbar.show('PDF enviado correctamente.', 'success');
           this.sending = false;
         },
         error: () => {
-          alert('Error al enviar PDF');
+          this.snackbar.show('Error al enviar PDF.', 'error');
           this.sending = false;
         },
       });
@@ -148,4 +172,5 @@ export class Reports implements OnInit {
     a.click();
     window.URL.revokeObjectURL(url);
   }
+    
 }

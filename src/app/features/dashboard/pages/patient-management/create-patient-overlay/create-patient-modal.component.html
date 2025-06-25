@@ -1,5 +1,5 @@
 <form [formGroup]="form" (ngSubmit)="submit()" class="modal-form">
-  <h3>Crear Paciente</h3>
+  <h3>{{ patient ? 'Editar Paciente' : 'Crear Paciente' }}</h3>
   <input class="input" formControlName="dni" placeholder="DNI" />
   <input class="input" formControlName="name" placeholder="Nombres" />
   <input class="input" formControlName="last_name" placeholder="Apellidos" />

@@ -6,8 +6,17 @@
 
 <form class="formulario" (submit)="onSubmit($event)">
   <label for="titulo">Nombre de Consulta</label>
-  <input type="text" id="titulo" [(ngModel)]="titulo" name="titulo" />
-
+  <select id="tipoConsulta" [(ngModel)]="titulo" name="tipoConsulta" required>
+    <option value="" disabled selected>Seleccione un tipo</option>
+    <option value="problema_tecnico">Problema técnico</option>
+    <option value="sugerencia">Sugerencia</option>
+    <option value="consulta_general">Consulta general</option>
+    <option value="soporte_cuenta">Soporte de cuenta</option>
+    <option value="otro">Otro</option>
+  </select>
+  <div *ngIf="!titulo && submitted" class="msg-error">
+  Selecciona un tipo de consulta.
+</div>
   <label for="descripcion">Descripción</label>
   <textarea
     id="descripcion"
@@ -15,8 +24,10 @@
     [(ngModel)]="descripcion"
     name="descripcion"
   ></textarea>
-
-  <button type="submit" class="btn" [disabled]="loading">
-    {{ loading ? 'Enviando...' : 'Enviar' }}
-  </button>
-</form>
+<div *ngIf="!descripcion.trim() && submitted" class="msg-error">
+  Escribe una descripción de tu consulta.
+</div>
+<button type="submit" class="btn" [disabled]="loading">
+  <span *ngIf="loading" class="spinner"></span>
+  {{ loading ? 'Enviando...' : 'Enviar' }}
+</button>

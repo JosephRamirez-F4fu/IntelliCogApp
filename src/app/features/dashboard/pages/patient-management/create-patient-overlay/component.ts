@@ -33,19 +33,22 @@ export class CreatePatientModalComponent {
       // Agrega más comorbilidades aquí si lo necesitas
     });
   }
-  ngOnInit() {
-    if (this.patient) {
-      this.form.patchValue({
-        ...this.patient,
-        hipertension: this.patient.comorbilites?.hipertension ?? false,
-      });
-    }
+ngOnInit() {
+  if (this.patient) {
+    this.form.patchValue({
+      ...this.patient,
+      hipertension: this.patient.comorbilites?.hipertension ?? false,
+    });
   }
+}
 
   submit() {
     if (this.form.valid) {
-      this.created.emit(this.form.value);
-    }
+   const { hipertension, ...rest } = this.form.value;
+    this.created.emit({
+      ...rest,
+      comorbilites: { hipertension }
+    });    }
   }
   cancel() {
     this.cancelled.emit();

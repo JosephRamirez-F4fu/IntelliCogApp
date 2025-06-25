@@ -343,12 +343,7 @@ export class EvaluationDetailPageComponent implements OnInit {
 
     // Guardar datos clínicos si es RF
     if (this.evaluacion.modality === 'RF') {
-      console.log('datos clnicos');
-      ops.push(
-        this.service
-          .updateClinicData(this.evaluacionId, this.clinicForm.value)
-          .toPromise()
-      );
+    this.guardarDatosClinicos();
     }
 
     console.log('nota clinica', this.notaForm.value);
