@@ -5,7 +5,8 @@
     <input
       id="newPassword"
       name="newPassword"
-      type="password"
++        type="{{ showNewPassword ? 'text' : 'password' }}"
+
       [(ngModel)]="newPassword"
       required
     />
@@ -13,14 +14,18 @@
     <input
       id="confirmPassword"
       name="confirmPassword"
-      type="password"
+  type="{{ showNewPassword ? 'text' : 'password' }}"
       [(ngModel)]="confirmPassword"
       required
     />
+    <button type="button" (click)="showNewPassword = !showNewPassword">
+  {{ showNewPassword ? 'Ocultar' : 'Mostrar' }}
+</button>
     <button
       type="submit"
       [disabled]="!token || !newPassword || !confirmPassword || loading"
-    >
+    >  <span *ngIf="loading" class="spinner"></span>
+
       Cambiar contraseña
     </button>
   </form>

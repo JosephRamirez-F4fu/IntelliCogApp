@@ -140,3 +140,12 @@
     margin-top: 18px;
     text-align: center;
 }
+.email-input.invalid {
+  border-color: #e53e3e;
+}
+.msg-error {
+  color: #e53e3e;
+  font-size: 13px;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}

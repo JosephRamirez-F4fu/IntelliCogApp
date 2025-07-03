@@ -26,8 +26,8 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-
-import ChartDataLabels from 'chartjs-plugin-datalabels';
+import { SnackbarService } from '@core/services/snackbar-service';
+import { debounceTime, Subject } from 'rxjs';
 
 Chart.register(
   BarController,
@@ -46,94 +46,40 @@ Chart.register(
 );
 
 @Component({
-  selector: 'app-anailisis-results',
-  templateUrl: 'anailisis-results.html',
-  styleUrls: ['anailisis-results.css'],
+  selector: 'app-analisis-results',
+  templateUrl: './anailisis-results.html',
+  styleUrls: ['./anailisis-results.css'],
   standalone: true,
   imports: [BaseChartDirective, CommonModule, FormsModule],
-  providers: [EvaluationsService, PatientManagementService],
+  providers: [EvaluationsService, PatientManagementService, SnackbarService],
 })
 export class AnailisisResults implements OnInit {
-  // Filtros
   patients: PatientModel[] = [];
+  evaluations: EvaluationModel[] = [];
+
   selectedPatient: PatientModel | null = null;
+  patientSearch: string = '';
+  filteredPatients: PatientModel[] = [];
+
   sex: string = '';
   modality: string = '';
   minAge: number | null = null;
   maxAge: number | null = null;
 
-  // Datos para el gráfico
-  evaluations: EvaluationModel[] = [];
+  private searchSubject = new Subject<string>();
 
-  // Configuración Chart.js
-  barChartOptions: ChartConfiguration['options'] = {
-    responsive: true,
-  };
-  barChartLabels: string[] = [];
-  barChartType: ChartType = 'bar';
-  barChartData: ChartData<'bar'> = {
-    labels: [],
-    datasets: [
-      {
-        data: [],
-        label: 'Cantidad de Evaluaciones',
-        backgroundColor: '#5a67d8',
-      },
-    ],
-  };
-
+  barChartOptions: ChartConfiguration['options'] = { responsive: true };
+  barChartData: ChartData<'bar'> = { labels: [], datasets: [] };
   pieChartData: ChartData<'pie', number[], string> = {
     labels: [],
-    datasets: [
-      {
-        data: [],
-        backgroundColor: [
-          '#5a67d8',
-          '#48bb78',
-          '#f6ad55',
-          '#e53e3e',
-          '#a0aec0',
-        ],
-      },
-    ],
+    datasets: [],
   };
+  lineChartData: ChartData<'line'> = { labels: [], datasets: [] };
 
-  pieChartOptions = {
-    responsive: true,
-    plugins: {
-      datalabels: {
-        color: '#222',
-        font: { weight: 'bold' as 'bold', size: 15 },
-        formatter: (value: number, context: any) => {
-          const data = context.chart.data.datasets[0].data;
-          const total = data.reduce((a: number, b: number) => a + b, 0);
-          const percentage = total ? (value / total) * 100 : 0;
-          return percentage ? percentage.toFixed(1) + '%' : '';
-        },
-      },
-      legend: {
-        display: true,
-        position: 'top' as 'top',
-      },
-    },
-  };
-  ChartDataLabels = ChartDataLabels;
-
-  lineChartData: ChartData<'line'> = {
-    labels: [],
-    datasets: [
-      {
-        data: [],
-        label: 'Evaluaciones en el tiempo',
-        fill: false,
-        borderColor: '#5a67d8',
-        tension: 0.3,
-      },
-    ],
-  };
   constructor(
     private evalService: EvaluationsService,
-    private patientService: PatientManagementService
+    private patientService: PatientManagementService,
+    private snackbar: SnackbarService
   ) {}
 
   ngOnInit(): void {
@@ -148,66 +94,123 @@ export class AnailisisResults implements OnInit {
       }
     }
     this.loadPatients();
+    this.setupSearchListener();
+    this.loadEvaluations();
+  }
+
+  private setupSearchListener() {
+    this.searchSubject.pipe(debounceTime(300)).subscribe((term) => {
+      this.searchPatients(term);
+    });
+  }
+
+  onPatientSearch() {
+    const term = this.patientSearch.trim();
+    if (term.length < 3) {
+      this.filteredPatients = [];
+      if (term.length > 0) {
+        this.snackbar.show(
+          'Escribe al menos 3 caracteres para buscar.',
+          'warning'
+        );
+      }
+      return;
+    }
+    this.searchSubject.next(term);
+  }
+
+  private searchPatients(term: string) {
+    const isDni = /^\d+$/.test(term);
+    const filter = isDni ? { dni: term } : { full_name: term };
+    this.patientService.getPatientsFiltered(filter).subscribe((patients) => {
+      this.filteredPatients = patients || [];
+      if (this.filteredPatients.length === 0) {
+        this.snackbar.show('No se encontraron pacientes.', 'info');
+      }
+    });
+  }
+
+  selectPatient(patient: PatientModel) {
+    this.selectedPatient = patient;
+    this.patientSearch = `${patient.name} ${patient.last_name} (${patient.dni})`;
+    this.filteredPatients = [];
+    this.loadEvaluations();
+  }
+
+  clearSelectedPatient() {
+    this.selectedPatient = null;
+    this.patientSearch = '';
     this.loadEvaluations();
   }
 
   loadPatients() {
-    this.patientService.getPatients().subscribe((patients) => {
-      this.patients = patients;
+    this.patientService.getPatients().subscribe((res) => {
+      this.patients = res;
     });
   }
 
   loadEvaluations() {
-    // Construir filtros
     const params: any = {};
     if (this.selectedPatient) params.dni = this.selectedPatient.dni;
     if (this.sex) params.sex = this.sex;
     if (this.modality) params.modality = this.modality;
 
-    this.evalService.getEvaluationsFiltered(params).subscribe((res: any) => {
-      this.evaluations = res.items || res;
-      // Filtrar por edad si corresponde
-      if (this.minAge !== null || this.maxAge !== null) {
-        this.evaluations = this.evaluations.filter((ev) => {
-          const age = ev.patient?.age;
-          if (age === undefined) return false;
-          if (this.minAge !== null && age < this.minAge) return false;
-          if (this.maxAge !== null && age > this.maxAge) return false;
-
-          return true;
-        });
-      }
-      if (this.sex) {
-        this.evaluations = this.evaluations.filter(
-          (ev) => ev.patient?.sex === this.sex
+    this.evalService.getEvaluationsFiltered(params).subscribe({
+      next: (res: any) => {
+        this.evaluations = (res.items || res).filter((ev: EvaluationModel) =>
+          this.ageFilter(ev)
         );
-      }
-      this.updateChart();
+        this.updateCharts();
+      },
+      error: () => {
+        this.snackbar.show('Error al cargar evaluaciones.', 'error');
+      },
     });
   }
 
-  updateChart() {
-    // Barras y Pie: cantidad de evaluaciones por tipo de resultado
+  private ageFilter(ev: EvaluationModel): boolean {
+    const age = ev.patient?.age;
+    if (age === undefined) return false;
+    if (this.minAge !== null && age < this.minAge) return false;
+    if (this.maxAge !== null && age > this.maxAge) return false;
+    return true;
+  }
+
+  onFilterChange() {
+    this.loadEvaluations();
+  }
+
+  private updateCharts() {
     const resultCount: { [key: string]: number } = {};
+    const dateCount: { [date: string]: number } = {};
+
     for (const ev of this.evaluations) {
       const key = ev.model_classification || 'Sin clasificar';
       resultCount[key] = (resultCount[key] || 0) + 1;
+
+      const date = ev.created_at ? ev.created_at.slice(0, 10) : 'Sin fecha';
+      dateCount[date] = (dateCount[date] || 0) + 1;
     }
-    const labels = Object.keys(resultCount);
-    const data = Object.values(resultCount);
+
+    const barLabels = Object.keys(resultCount);
+    const barData = Object.values(resultCount);
 
     this.barChartData = {
-      labels,
+      labels: barLabels,
       datasets: [
-        { data, label: 'Cantidad de Evaluaciones', backgroundColor: '#5a67d8' },
+        {
+          data: barData,
+          label: 'Cantidad de Evaluaciones',
+          backgroundColor: '#5a67d8',
+        },
       ],
     };
 
     this.pieChartData = {
-      labels,
+      labels: barLabels,
       datasets: [
         {
-          data,
+          data: barData,
           backgroundColor: [
             '#5a67d8',
             '#48bb78',
@@ -219,12 +222,6 @@ export class AnailisisResults implements OnInit {
       ],
     };
 
-    // Línea: evaluaciones por fecha (ejemplo simple)
-    const dateCount: { [date: string]: number } = {};
-    for (const ev of this.evaluations) {
-      const date = ev.created_at ? ev.created_at.slice(0, 10) : 'Sin fecha';
-      dateCount[date] = (dateCount[date] || 0) + 1;
-    }
     const lineLabels = Object.keys(dateCount).sort();
     const lineData = lineLabels.map((l) => dateCount[l]);
     this.lineChartData = {
@@ -241,41 +238,7 @@ export class AnailisisResults implements OnInit {
     };
   }
 
-  onFilterChange() {
-    this.loadEvaluations();
-  }
-
-  patientSearch: string = '';
-  filteredPatients: PatientModel[] = [];
-
-  // Buscar pacientes por nombre o DNI
-  onPatientSearch() {
-    const term = this.patientSearch.trim();
-    if (term.length < 3) {
-      this.filteredPatients = [];
-      return;
-    }
-    const isDni = /^\d+$/.test(term);
-    const filter = isDni ? { dni: term } : { full_name: term };
-    this.patientService.getPatientsFiltered(filter).subscribe((patients) => {
-      this.filteredPatients = patients || [];
-    });
-  }
-
-  selectPatient(patient: PatientModel) {
-    this.selectedPatient = patient;
-    this.patientSearch = `${patient.name} ${patient.last_name} (${patient.dni})`;
-    this.filteredPatients = [];
-    sessionStorage.setItem('selectedPatient', JSON.stringify(patient));
-    this.loadEvaluations();
-  }
-
-  clearSelectedPatient() {
-    this.selectedPatient = null;
-    this.patientSearch = '';
-    this.evaluations = [];
-    this.filteredPatients = [];
-    sessionStorage.removeItem('selectedPatient');
-    this.loadEvaluations();
+  trackByDni(index: number, item: PatientModel) {
+    return item.dni;
   }
 }

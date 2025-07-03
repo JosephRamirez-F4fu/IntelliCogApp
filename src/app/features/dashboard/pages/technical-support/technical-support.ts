@@ -15,6 +15,8 @@ export class TechnicalSupport {
   titulo = '';
   descripcion = '';
   loading = false;
+  submitted = false;
+
   constructor(
     private userService: UserService,
     private snackbar: SnackbarService
@@ -22,6 +24,8 @@ export class TechnicalSupport {
 
   onSubmit(event: Event) {
     event.preventDefault();
+      this.submitted = true;
+
     if (!this.titulo.trim() || !this.descripcion.trim()) {
       this.snackbar.show('Completa todos los campos', 'warning');
       return;

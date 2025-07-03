@@ -16,7 +16,7 @@ export class ChangePassword {
   confirmPassword = '';
   loading = false;
   message = '';
-
+showNewPassword = false;
   constructor(private recoverService: RecoverService, private router: Router) {
     this.token = this.recoverService.token || '';
     if (!this.token) {
