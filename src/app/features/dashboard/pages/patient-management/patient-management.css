@@ -471,6 +471,11 @@ body {
   margin-left: 4px;
 }
 
+.selected-row {
+  background: #e3eaff !important;
+  font-weight: 600;
+}
+
 .pagination {
   text-align: right;
   margin-top: 12px;

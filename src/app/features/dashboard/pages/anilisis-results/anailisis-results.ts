@@ -27,6 +27,8 @@ import {
   Legend,
 } from 'chart.js';
 
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+
 Chart.register(
   BarController,
   BarElement,
@@ -39,7 +41,8 @@ Chart.register(
   PointElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  ChartDataLabels
 );
 
 @Component({
@@ -95,6 +98,27 @@ export class AnailisisResults implements OnInit {
     ],
   };
 
+  pieChartOptions = {
+    responsive: true,
+    plugins: {
+      datalabels: {
+        color: '#222',
+        font: { weight: 'bold' as 'bold', size: 15 },
+        formatter: (value: number, context: any) => {
+          const data = context.chart.data.datasets[0].data;
+          const total = data.reduce((a: number, b: number) => a + b, 0);
+          const percentage = total ? (value / total) * 100 : 0;
+          return percentage ? percentage.toFixed(1) + '%' : '';
+        },
+      },
+      legend: {
+        display: true,
+        position: 'top' as 'top',
+      },
+    },
+  };
+  ChartDataLabels = ChartDataLabels;
+
   lineChartData: ChartData<'line'> = {
     labels: [],
     datasets: [
@@ -113,6 +137,16 @@ export class AnailisisResults implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    const saved = sessionStorage.getItem('selectedPatient');
+    if (saved) {
+      this.selectedPatient = JSON.parse(saved);
+      if (!this.selectedPatient || !this.selectedPatient.dni) {
+        this.clearSelectedPatient();
+      } else {
+        this.patientSearch = `${this.selectedPatient.name} ${this.selectedPatient.last_name} (${this.selectedPatient.dni})`;
+        this.onFilterChange();
+      }
+    }
     this.loadPatients();
     this.loadEvaluations();
   }
@@ -232,12 +266,16 @@ export class AnailisisResults implements OnInit {
     this.selectedPatient = patient;
     this.patientSearch = `${patient.name} ${patient.last_name} (${patient.dni})`;
     this.filteredPatients = [];
-    this.onFilterChange();
+    sessionStorage.setItem('selectedPatient', JSON.stringify(patient));
+    this.loadEvaluations();
   }
 
   clearSelectedPatient() {
     this.selectedPatient = null;
     this.patientSearch = '';
-    this.onFilterChange();
+    this.evaluations = [];
+    this.filteredPatients = [];
+    sessionStorage.removeItem('selectedPatient');
+    this.loadEvaluations();
   }
 }

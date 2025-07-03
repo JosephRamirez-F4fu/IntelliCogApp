@@ -30,6 +30,7 @@
     gap: 14px;
     justify-content: center;
     margin-bottom: 24px;
+    margin-top: 24px;
 }
 
 .btn.secondary {
@@ -170,4 +171,10 @@ label {
 .nota-form textarea {
     resize: none;
     min-height: 90px;
+}
+
+.input-warning {
+    color: #e53e3e;
+    font-size: 0.95em;
+    margin-bottom: 8px;
 }

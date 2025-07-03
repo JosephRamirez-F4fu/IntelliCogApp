@@ -73,6 +73,22 @@ export class UsageGuide {
         `<b>Respuesta:</b> Un miembro del equipo de soporte se pondrá en contacto contigo a la brevedad al correo registrado.`,
       ],
     },
+    {
+      img: '/images/data-base.svg',
+      alt: 'Datos de entrenamiento',
+      titulo: 'Precedencia de los datos de entrenamiento',
+      pasos: [
+        `<b>Datos clínicos:</b> <br>
+        <b>Investigadores principales:</b> Bednorz, A.<br>
+    283 pacientes hospitalizados en el Hospital Geriátrico Juan Pablo II de Katowice entre 2015 y 2019, como parte de una evaluación geriátrica integral.<br>
+    `,
+        `<b>Resonancia Magnética:</b> <br>
+    OASIS-1: Cross-Sectional<br>
+    <b>Investigadores principales:</b> D. Marcus, R. Buckner, J. Csernansky, J. Morris<br>
+    <b>Subvenciones:</b> P50 AG05681, P01 AG03991, P01 AG026276, R01 AG021910, P20 MH071616, U24 RR021382<br>
+    `,
+      ],
+    },
   ];
 
   toggle(idx: number) {

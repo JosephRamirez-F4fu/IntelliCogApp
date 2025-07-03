@@ -52,7 +52,7 @@ export class Login {
           const token = response.access_token;
           this.authService.setToken(token);
           this.loading = false;
-          this.snackbar.show('Login successful', 'success', 4000);
+          this.snackbar.show('Acceso exitoso', 'success', 4000);
           this.router.navigate(['/dashboard']);
         },
         error: (error) => {

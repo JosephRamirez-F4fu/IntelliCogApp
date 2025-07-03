@@ -40,15 +40,14 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let patient of filteredPatientsList">
+        <tr
+          *ngFor="let patient of filteredPatientsList"
+          [class.selected-row]="selectedPatient && patient.dni === selectedPatient.dni"
+        >
           <td>{{ patient.dni }}</td>
           <td>{{ patient.name }} {{ patient.last_name }}</td>
           <td>
-            <span
-              [ngClass]="{'badge male': patient.sex === 'MALE', 'badge female': patient.sex === 'FEMALE'}"
-            >
-              {{ patient.sex === 'MALE' ? 'Hombre' : 'Mujer' }}
-            </span>
+            <span> {{ patient.sex === 'MALE' ? 'Hombre' : 'Mujer' }} </span>
           </td>
           <td>{{ patient.age }}</td>
           <td>{{ patient.age_education || '-' }}</td>

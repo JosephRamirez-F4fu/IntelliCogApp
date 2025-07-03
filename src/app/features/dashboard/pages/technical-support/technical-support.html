@@ -6,8 +6,14 @@
 
 <form class="formulario" (submit)="onSubmit($event)">
   <label for="titulo">Nombre de Consulta</label>
-  <input type="text" id="titulo" [(ngModel)]="titulo" name="titulo" />
-
+  <select id="titulo" [(ngModel)]="titulo" name="titulo" class="input">
+    <option value="" disabled selected>Selecciona una opción</option>
+    <option value="Problemas de acceso">Problemas de acceso</option>
+    <option value="Error en la plataforma">Error en la plataforma</option>
+    <option value="Consulta sobre resultados">Consulta sobre resultados</option>
+    <option value="Sugerencia de mejora">Sugerencia de mejora</option>
+    <option value="Otro">Otro</option>
+  </select>
   <label for="descripcion">Descripción</label>
   <textarea
     id="descripcion"

@@ -1,5 +1,5 @@
 <form [formGroup]="form" (ngSubmit)="submit()" class="modal-form">
-  <h3>Crear Paciente</h3>
+  <h3>{{ !patient ? "Crear Paciente" : "Editar Paciente" }}</h3>
   <input class="input" formControlName="dni" placeholder="DNI" />
   <input class="input" formControlName="name" placeholder="Nombres" />
   <input class="input" formControlName="last_name" placeholder="Apellidos" />
@@ -23,7 +23,9 @@
     <!-- Puedes añadir más comorbilidades aquí -->
   </div>
   <div class="modal-actions">
-    <button type="submit" [disabled]="form.invalid">Crear</button>
+    <button type="submit" [disabled]="form.invalid">
+      {{ !patient ? "Guardar" : "Crear" }}
+    </button>
     <button type="button" (click)="cancel()">Cancelar</button>
   </div>
 </form>

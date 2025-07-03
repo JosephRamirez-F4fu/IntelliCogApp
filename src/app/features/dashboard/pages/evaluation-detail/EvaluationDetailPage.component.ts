@@ -55,6 +55,7 @@ export class EvaluationDetailPageComponent implements OnInit {
     });
 
     this.clinicForm = this.fb.group({
+      iadl: [null],
       adl: [null],
       potassium: [null],
       berg: [null],
@@ -104,9 +105,10 @@ export class EvaluationDetailPageComponent implements OnInit {
               if (data) {
                 this.clinicForm.patchValue({
                   adl: data.adl,
-                  vit_b12: data.vit_b12,
+                  iadl: data.iadl,
                   berg: data.berg,
                   vitamin_d: data.vitamin_d,
+                  vit_b12: data.vit_b12,
                   potassium: data.potassium,
                   stress: data.stress,
                 });
@@ -153,7 +155,8 @@ export class EvaluationDetailPageComponent implements OnInit {
     if (!this.evaluacion) return;
     const data: EvaluationModel = {
       ...this.evaluacion,
-      manual_classification: this.manualForm.value.manual_classification,
+      manual_classification:
+        this.manualForm.value.manual_classification || null,
     };
     this.loading = true;
     this.service.updateEvalution(this.evaluacionId, data).subscribe({
@@ -350,8 +353,6 @@ export class EvaluationDetailPageComponent implements OnInit {
           .toPromise()
       );
     }
-
-    console.log('nota clinica', this.notaForm.value);
     // Guardar nota clínica
     const notaPromise = new Promise((resolve, reject) => {
       this.loading = true;
@@ -366,7 +367,10 @@ export class EvaluationDetailPageComponent implements OnInit {
         this.service
           .createClinicResults(this.evaluacionId, this.notaForm.value)
           .subscribe({
-            next: () => resolve(true),
+            next: (clinic_resul) => {
+              this.notaClinica = clinic_resul;
+              resolve(true);
+            },
             error: () => reject(),
           });
       }
@@ -385,7 +389,6 @@ export class EvaluationDetailPageComponent implements OnInit {
   }
 
   salir() {
-    // Redirige a la página de información del paciente
-    this.router.navigate(['/dashboard/pacientes']);
+    this.router.navigate(['/dashboard/evaluaciones']);
   }
 }

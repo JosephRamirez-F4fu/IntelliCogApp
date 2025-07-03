@@ -12,6 +12,7 @@ import { Router, RouterModule } from '@angular/router';
 import { UserLinkComponent } from '@components/user-link/user-link.component';
 import { OverlayModalService } from '@components/overlay/overlay.service';
 import { CreatePatientModalComponent } from './create-patient-overlay/component';
+import { EvaluationsService } from './../../services/evaluations-service';
 
 @Component({
   selector: 'app-patient-management',
@@ -25,7 +26,12 @@ import { CreatePatientModalComponent } from './create-patient-overlay/component'
     RouterModule,
     UserLinkComponent,
   ],
-  providers: [PatientManagementService, UserService],
+  providers: [
+    PatientManagementService,
+    UserService,
+    EvaluationsService,
+    OverlayModalService,
+  ],
 })
 export class PatientManagement implements OnInit {
   patients: PatientModel[] = [];
@@ -34,15 +40,21 @@ export class PatientManagement implements OnInit {
   filterDni = '';
   editingPatient: PatientModel | null = null;
   user!: User;
+  selectedPatient: PatientModel | null = null;
 
   constructor(
     private patientService: PatientManagementService,
+    private evaluation_service: EvaluationsService,
     private snackbar: SnackbarService,
     private overlay: OverlayModalService,
     private router: Router // <-- Añade esto
   ) {}
 
   ngOnInit() {
+    const saved = sessionStorage.getItem('selectedPatient');
+    if (saved) {
+      this.selectedPatient = JSON.parse(saved);
+    }
     this.loadPatients();
   }
 
@@ -73,9 +85,28 @@ export class PatientManagement implements OnInit {
 
   deletePatient(patient: PatientModel) {
     if (confirm('¿Seguro que deseas eliminar este paciente?')) {
-      this.patientService.deletePatient(patient.id!).subscribe(() => {
-        this.loadPatients();
-      });
+      // ver si tieene evaluaciones asociadas
+      this.evaluation_service
+        .getEvaluationsFiltered({ dni: patient.dni })
+        .subscribe((evaluations: []) => {
+          if (evaluations.length > 0) {
+            this.snackbar.show(
+              'No se puede eliminar un paciente con evaluaciones asociadas.',
+              'error',
+              3000
+            );
+            return;
+          }
+          this.patientService.deletePatient(patient.id!).subscribe({
+            next: () => {
+              this.snackbar.show('Paciente eliminado', 'success');
+              this.loadPatients();
+            },
+            error: () => {
+              this.snackbar.show('Error al eliminar paciente', 'error');
+            },
+          });
+        });
     }
   }
 
@@ -124,9 +155,9 @@ export class PatientManagement implements OnInit {
     const ref = this.overlay.open(CreatePatientModalComponent);
     const instance = ref.instance as CreatePatientModalComponent;
     instance.created.subscribe((patientData) => {
-      this.validatePatientForm(patientData);
       this.patientService.createPatient(patientData).subscribe({
         next: () => {
+          console.log('Paciente creado:', patientData);
           this.snackbar.show('Paciente creado', 'success');
           this.overlay.close();
           this.loadPatients();

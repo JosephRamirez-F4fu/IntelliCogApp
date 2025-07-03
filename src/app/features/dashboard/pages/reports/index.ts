@@ -31,8 +31,18 @@ export class Reports implements OnInit {
     private patientService: PatientManagementService
   ) {}
 
-  ngOnInit(): void {}
-
+  ngOnInit(): void {
+    const saved = sessionStorage.getItem('selectedPatient');
+    if (saved) {
+      this.selectedPatient = JSON.parse(saved);
+      if (!this.selectedPatient || !this.selectedPatient.dni) {
+        this.clearSelectedPatient();
+      } else {
+        this.patientSearch = `${this.selectedPatient.name} ${this.selectedPatient.last_name} (${this.selectedPatient.dni})`;
+        this.loadEvaluations();
+      }
+    }
+  }
   onPatientSearch() {
     const term = this.patientSearch.trim();
     if (term.length < 3) {

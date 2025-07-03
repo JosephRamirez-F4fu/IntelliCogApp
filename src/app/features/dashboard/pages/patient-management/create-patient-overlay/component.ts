@@ -6,6 +6,7 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { PatientModel } from 'app/features/dashboard/services/patient-management.service';
 
 @Component({
   selector: 'app-create-patient-modal',
@@ -15,7 +16,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./create-patient-modal.component.css'],
 })
 export class CreatePatientModalComponent {
-  @Output() created = new EventEmitter<any>();
+  @Output() created = new EventEmitter<PatientModel>();
   @Output() cancelled = new EventEmitter<void>();
   @Input() patient?: any; // O usa PatientModel si tienes la interfaz
 
@@ -44,7 +45,13 @@ export class CreatePatientModalComponent {
 
   submit() {
     if (this.form.valid) {
-      this.created.emit(this.form.value);
+      this.created.emit({
+        ...this.form.value,
+        comorbilites: {
+          hipertension: this.form.value.hipertension,
+          // Agrega más comorbilidades aquí si lo necesitas
+        },
+      } as PatientModel);
     }
   }
   cancel() {

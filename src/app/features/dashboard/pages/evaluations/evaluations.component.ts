@@ -128,6 +128,23 @@ export class EvaluationsPageComponent implements OnInit {
 
     instance.created.subscribe(({ dni, modality }) => {
       this.loading = true;
+      // si mas e una evaluacion en el mismo dia del mismo tipo , lanzar error
+      if (
+        this.evaluaciones.some(
+          (e) =>
+            e.modality === modality &&
+            e.created_at &&
+            new Date(e.created_at).toDateString() === new Date().toDateString()
+        )
+      ) {
+        this.snackbar.show(
+          'Ya existe una evaluación de este tipo hoy',
+          'error'
+        );
+        this.overlay.close();
+        this.loading = false;
+        return;
+      }
       this.patientService.getPatientsByDni(dni).subscribe((patient) => {
         if (patient && patient.id) {
           this.service
@@ -217,5 +234,33 @@ export class EvaluationsPageComponent implements OnInit {
       return 'Datos Clínicos';
     }
     return modality;
+  }
+
+  isoUtcToLocalString(isoDate: string): string {
+    if (!isoDate) return '';
+    const date = new Date(isoDate);
+    // Opcional: puedes ajustar el formato según tus necesidades
+    const local = this.convertUTCDateToLocalDate(date);
+    return local.toLocaleString(undefined, {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
+    });
+  }
+
+  convertUTCDateToLocalDate(date: Date): Date {
+    var newDate = new Date(
+      date.getTime() + date.getTimezoneOffset() * 60 * 1000
+    );
+
+    var offset = date.getTimezoneOffset() / 60;
+    var hours = date.getHours();
+
+    newDate.setHours(hours - offset);
+
+    return newDate;
   }
 }
