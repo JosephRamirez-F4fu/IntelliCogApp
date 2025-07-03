@@ -28,6 +28,7 @@ import {
 } from 'chart.js';
 import { SnackbarService } from '@core/services/snackbar-service';
 import { debounceTime, Subject } from 'rxjs';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 Chart.register(
   BarController,
