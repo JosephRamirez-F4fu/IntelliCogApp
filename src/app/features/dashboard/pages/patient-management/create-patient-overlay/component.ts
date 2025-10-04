@@ -29,8 +29,6 @@ export class CreatePatientModalComponent {
       last_name: ['', Validators.required],
       sex: ['', Validators.required],
       age: [null, [Validators.required, Validators.min(0)]],
-      age_education: [null, [Validators.min(0)]],
-      hipertension: [false],
       // Agrega más comorbilidades aquí si lo necesitas
     });
   }
@@ -38,18 +36,13 @@ export class CreatePatientModalComponent {
     if (this.patient) {
       this.form.patchValue({
         ...this.patient,
-        hipertension: this.patient.comorbilites?.hipertension ?? false,
       });
     }
   }
 
   submit() {
     if (this.form.valid) {
-      const { hipertension, ...rest } = this.form.value;
-      this.created.emit({
-        ...rest,
-        comorbilites: { hipertension },
-      } as PatientModel);
+      this.created.emit(this.form.value);
     }
   }
 

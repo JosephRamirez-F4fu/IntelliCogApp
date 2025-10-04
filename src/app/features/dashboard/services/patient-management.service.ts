@@ -10,13 +10,6 @@ export interface PatientModel {
   last_name: string;
   sex: string;
   age: number;
-  age_education: number;
-  comorbilites?: PatientComorbilitesModel;
-}
-
-export interface PatientComorbilitesModel {
-  hipertension?: boolean;
-  patient_id?: number;
 }
 
 @Injectable()
@@ -49,27 +42,6 @@ export class PatientManagementService {
   // Obtener un paciente por ID
   getPatient(id: number): Observable<PatientModel> {
     return this.http.get(`${EndPoints.PATIENTS}/${id}`);
-  }
-
-  // Agregar o editar comorbilidades de un paciente
-  setComorbidities(
-    patientId: number,
-    comorbidities: PatientComorbilitesModel
-  ): Observable<any> {
-    const endpoint = EndPoints.PATIENTS_COMORBIDITIES.replace(
-      '{patient_id}',
-      String(patientId)
-    );
-    return this.http.put(endpoint, comorbidities);
-  }
-
-  // Obtener comorbilidades de un paciente
-  getComorbidities(patientId: number): Observable<PatientComorbilitesModel> {
-    const endpoint = EndPoints.PATIENTS_COMORBIDITIES.replace(
-      '{patient_id}',
-      String(patientId)
-    );
-    return this.http.get(endpoint);
   }
 
   // patient-management.service.ts

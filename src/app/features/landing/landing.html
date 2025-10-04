@@ -1,53 +1,177 @@
 <header class="header">
   <div class="logo">
-    <img class="logo-img" ngSrc="images/logo.jpeg" width="30" height="30" alt="IntelliCog Logo" />
+    <img
+      class="logo-img"
+      ngSrc="images/logo.jpeg"
+      width="36"
+      height="36"
+      alt="IntelliCog Logo"
+    />
     <span>IntelliCog</span>
   </div>
   <nav class="nav">
     <a href="#inicio">Inicio</a>
-    <a href="#acerca">Acerca de</a>
+    <a href="#beneficios">Beneficios</a>
+    <a href="#funcionalidades">Flujo</a>
     <a href="#contacto">Contacto</a>
-    <button class="btn-login" routerLink="/login">Iniciar Sesión</button>
+    <a class="btn-login" routerLink="/login">Iniciar sesión</a>
   </nav>
 </header>
 
-<section class="intro" id="inicio">
-  <div class="intro-text">
-    <h2>Plataforma inteligente para el apoyo diagnóstico del deterioro cognitivo en adultos mayores</h2>
-    <p>
-      Bienvenido a IntelliCog, una plataforma web diseñada para asistir a médicos geriatras en la clasificación automatizada del deterioro cognitivo. Con algoritmos avanzados de Machine Learning, nuestra herramienta proporciona diagnósticos precisos y visualizaciones interpretables.
-    </p>
-  </div>
-  <div class="intro-img">
-    <img ngSrc="images/landing1.png" fill alt="Visualización inteligente" />
-  </div>
-</section>
+<main>
+  <section class="hero" id="inicio">
+    <div class="hero-content">
+      <h1>Inteligencia clínica para decisiones más humanas y oportunas</h1>
+      <p>
+        IntelliCog combina modelos de Deep Learning y Machine Learning para
+        brindar a los equipos de salud una visión rápida, confiable e
+        interpretable del deterioro cognitivo. Reduce tiempos de evaluación,
+        centraliza historiales y entrega reportes en cuestión de minutos.
+      </p>
+      <div class="hero-actions">
+        <a class="btn-primary" routerLink="/login">Acceder a la plataforma</a>
+        <a class="btn-secondary" href="#contacto">Solicitar una demostración</a>
+      </div>
+      <ul class="hero-highlights">
+        <li>Evaluaciones multimodales con datos clínicos e imagenológicos.</li>
+        <li>
+          Interpretabilidad basada en SHAP para respaldar cada diagnóstico.
+        </li>
+        <li>Reportes PDF listos para compartir con pacientes y familias.</li>
+      </ul>
+    </div>
+    <div class="hero-image">
+      <img ngSrc="images/landing1.png" fill alt="Visualización inteligente" />
+    </div>
+  </section>
 
-<section class="descripcion" id="acerca">
-  <div class="descripcion-text">
-    <p>
-      IntelliCog es una plataforma inteligente para la clasificación del deterioro cognitivo en adultos mayores, que integra el análisis de variables clínicas, funcionales, bioquímicas y neuroimágenes (EEG y MRI). Utiliza un enfoque multimodal con modelos combinados de Random Forest y Redes Neuronales Convolucionales (CNN) entrenados con datos reales, permitiendo predecir con alta precisión si el paciente se encuentra en estado Control, con Deterioro Cognitivo Leve (MCI) o Demencia. Incluye módulos de interpretación basados en SHAP y generación automática de reportes en PDF.
-    </p>
-  </div>
-  <div class="descripcion-img" >
-    <img ngSrc="images/landing2.png" fill alt="Doctor y análisis" />
-  </div>
-</section>
+  <section class="metrics" id="respaldo">
+    <article class="metric-card">
+      <span class="metric-value">95%</span>
+      <p class="metric-description">
+        Precisión promedio en cohortes piloto validadas con especialistas.
+      </p>
+    </article>
+    <article class="metric-card">
+      <span class="metric-value">+40%</span>
+      <p class="metric-description">
+        Reducción del tiempo de análisis por paciente gracias a flujos guiados.
+      </p>
+    </article>
+    <article class="metric-card">
+      <span class="metric-value">24/7</span>
+      <p class="metric-description">
+        Disponibilidad en la nube con controles de acceso y auditoría.
+      </p>
+    </article>
+  </section>
 
-<footer class="footer" id="contacto">
-  <h3>📞 Contacto</h3>
-  <p>¿Tienes preguntas o sugerencias?<br />Contáctanos a través de:</p>
-  <p>
-    📧 Email: <a href="mailto:soporte@intellicog.org">soporte&#64;intellicog.org</a><br />
-    📞 Teléfono: (+51) 999 999 999<br />
-    🕐 Horario de atención: Lunes a Viernes, de 9:00 a 18:00
-  </p>
-  <div class="footer-bottom">
+  <section class="features" id="beneficios">
+    <h2>Beneficios Clave</h2>
+    <p class="section-subtitle">
+      Diseñado junto a profesionales de geriatría y neurología para ofrecer
+      información procesable en cada consulta.
+    </p>
+    <div class="feature-grid">
+      <article class="feature-card">
+        <h3>Evaluación integrada</h3>
+        <p>
+          Consolida variables clínicas, funcionales y biomarcadores en un solo
+          panel sencillo de interpretar.
+        </p>
+      </article>
+      <article class="feature-card">
+        <h3>Alertas tempranas</h3>
+        <p>
+          Identifica patrones de deterioro cognitivo leve y envía
+          recomendaciones de seguimiento personalizadas.
+        </p>
+      </article>
+      <article class="feature-card">
+        <h3>Visualizaciones comprensibles</h3>
+        <p>
+          Comparte mapas de calor y análisis de contribución para explicar el
+          resultado al paciente y su familia.
+        </p>
+      </article>
+      <article class="feature-card">
+        <h3>Integración segura</h3>
+        <p>
+          Compatible con sistemas clínicos existentes mediante API RESTful y
+          estándares de seguridad.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section class="workflow" id="funcionalidades">
+    <h2>¿Cómo funciona IntelliCog?</h2>
+    <div class="workflow-steps">
+      <article class="step-card">
+        <span class="step-number">1</span>
+        <h3>Registra y centraliza</h3>
+        <p>
+          Captura datos clínicos, resultados de exámenes y neuroimágenes desde
+          cualquier dispositivo.
+        </p>
+      </article>
+      <article class="step-card">
+        <span class="step-number">2</span>
+        <h3>Ejecuta modelos avanzados</h3>
+        <p>
+          Aplica automáticamente la combinación óptima entre Random Forest y CNN
+          entrenadas con datos reales.
+        </p>
+      </article>
+      <article class="step-card">
+        <span class="step-number">3</span>
+        <h3>Interpreta y actúa</h3>
+        <p>
+          Visualiza explicaciones con SHAP, genera reportes en PDF y define
+          planes de seguimiento inmediato.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section class="cta" id="contacto">
+    <div class="cta-content">
+      <h2>Acompaña cada diagnóstico con datos confiables</h2>
+      <p>
+        Cuéntanos sobre tus necesidades clínicas y recibe una demo personalizada
+        del flujo completo de IntelliCog.
+      </p>
+      <div class="cta-actions">
+        <a class="btn-primary" href="mailto:soporte@intellicog.org"
+          >Escribir al equipo</a
+        >
+        <a class="btn-tertiary" href="tel:+51999999999"
+          >Llamar al (+51) 999 999 999</a
+        >
+      </div>
+    </div>
+    <div class="contact-card">
+      <h3>Contacto directo</h3>
+      <ul>
+        <li><strong>Email:</strong> soporte&#64;intellicog.org</li>
+        <li><strong>Teléfono:</strong> (+51) 999 999 999</li>
+        <li><strong>Horario:</strong> Lunes a Viernes de 9:00 a 18:00</li>
+      </ul>
+      <p class="contact-note">
+        También ofrecemos sesiones virtuales de entrenamiento para tu equipo.
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer-top">
     <p>© 2025 IntelliCog. Todos los derechos reservados.</p>
-    <p>Desarrollado por el equipo académico de investigación</p>
-    <p>
-      <a href="#">Política de privacidad</a> |
-      <a href="#">Términos de uso</a>
-    </p>
+    <p>Desarrollado por el equipo académico de investigación.</p>
+  </div>
+  <div class="footer-links">
+    <a href="#">Política de privacidad</a>
+    <span>|</span>
+    <a href="#">Términos de uso</a>
   </div>
 </footer>

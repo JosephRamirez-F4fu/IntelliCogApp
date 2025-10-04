@@ -36,6 +36,20 @@ export class EvaluationDetailPageComponent implements OnInit {
   manualForm!: FormGroup;
   clinicForm!: FormGroup;
   notaForm!: FormGroup;
+  cdrScoreOptions = [
+    { value: 0, label: '0 - Normal' },
+    { value: 0.5, label: '0.5 - Muy leve' },
+    { value: 1, label: '1 - Leve' },
+    { value: 2, label: '2 - Moderado' },
+    { value: 3, label: '3 - Severo' },
+  ];
+  cdrSubComponents = [
+    { control: 'memory', label: 'Memoria' },
+    { control: 'orient', label: 'Orientación' },
+    { control: 'judgment', label: 'Juicio y Resolución de Problemas' },
+    { control: 'commun', label: 'Actividades Comunitarias' },
+    { control: 'homehobb', label: 'Hogar y Pasatiempos' },
+  ];
 
   constructor(
     private route: ActivatedRoute,
@@ -55,13 +69,11 @@ export class EvaluationDetailPageComponent implements OnInit {
     });
 
     this.clinicForm = this.fb.group({
-      iadl: [null],
-      adl: [null],
-      potassium: [null],
-      berg: [null],
-      vitamin_d: [null],
-      vit_b12: [null],
-      stress: [false],
+      memory: [null],
+      orient: [null],
+      judgment: [null],
+      commun: [null],
+      homehobb: [null],
     });
 
     this.notaForm = this.fb.group({
@@ -104,14 +116,13 @@ export class EvaluationDetailPageComponent implements OnInit {
             next: (data: ClinicDataModel) => {
               if (data) {
                 this.clinicForm.patchValue({
-                  adl: data.adl,
-                  iadl: data.iadl,
-                  berg: data.berg,
-                  vitamin_d: data.vitamin_d,
-                  vit_b12: data.vit_b12,
-                  potassium: data.potassium,
-                  stress: data.stress,
+                  memory: this.normalizeClinicValue(data.memory),
+                  orient: this.normalizeClinicValue(data.orient),
+                  judgment: this.normalizeClinicValue(data.judgment),
+                  commun: this.normalizeClinicValue(data.commun),
+                  homehobb: this.normalizeClinicValue(data.homehobb),
                 });
+
                 this.snackbar.show('Datos clínicos cargados', 'success', 3000);
               } else {
                 this.clinicForm.reset();
@@ -304,10 +315,18 @@ export class EvaluationDetailPageComponent implements OnInit {
     });
   }
 
+  private normalizeClinicValue(value: number | string | null | undefined) {
+    if (value === null || value === undefined || value === '') {
+      return null;
+    }
+    const parsed = typeof value === 'number' ? value : parseFloat(value);
+    return Number.isNaN(parsed) ? null : parsed;
+  }
+
   mapresult(evalucion: EvaluationModel) {
     if (!evalucion) return '';
-    if (evalucion.model_classification == 'MCI + DEMENTIA') {
-      return 'Deterioro cognitivo leve o demencia';
+    if (evalucion.model_classification == 'Dementia') {
+      return 'Demencia';
     }
     if (evalucion.model_classification == 'MCI') {
       return 'Deterioro cognitivo leve';
@@ -346,7 +365,7 @@ export class EvaluationDetailPageComponent implements OnInit {
 
     // Guardar datos clínicos si es RF
     if (this.evaluacion.modality === 'RF') {
-    this.guardarDatosClinicos();
+      this.guardarDatosClinicos();
     }
     // Guardar nota clínica
     const notaPromise = new Promise((resolve, reject) => {

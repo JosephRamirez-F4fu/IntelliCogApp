@@ -175,8 +175,7 @@ export class PatientManagement implements OnInit {
       !patient.name ||
       !patient.last_name ||
       !patient.sex ||
-      !patient.age ||
-      !patient.age_education
+      !patient.age
     ) {
       this.snackbar.show('Todos los campos son requeridos.', 'error', 3000);
       return;
@@ -199,15 +198,6 @@ export class PatientManagement implements OnInit {
 
     if (patient.age < 0 || patient.age > 105) {
       this.snackbar.show('La edad debe ser un valor válido.', 'error', 3000);
-      return;
-    }
-
-    if (patient.age_education < 0 || patient.age_education > 105) {
-      this.snackbar.show(
-        'La edad de educación debe ser un valor válido.',
-        'error',
-        3000
-      );
       return;
     }
 

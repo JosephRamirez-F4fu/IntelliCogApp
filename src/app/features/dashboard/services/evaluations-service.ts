@@ -5,13 +5,11 @@ import { EndPoints } from '@common/end-points';
 
 // Modelos TypeScript equivalentes a tus schemas de Python
 export interface ClinicDataModel {
-  adl?: number;
-  iadl?: number;
-  berg?: number;
-  vitamin_d?: number;
-  vit_b12?: number;
-  potassium?: number;
-  stress?: boolean;
+  memory?: number;
+  orient?: number;
+  judgment?: number;
+  commun?: number;
+  homehobb?: number;
 }
 
 export interface ClinicResultsModel {

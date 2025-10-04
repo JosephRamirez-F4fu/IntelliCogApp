@@ -50,7 +50,6 @@
             <span> {{ patient.sex === 'MALE' ? 'Hombre' : 'Mujer' }} </span>
           </td>
           <td>{{ patient.age }}</td>
-          <td>{{ patient.age_education || '-' }}</td>
           <td>
             <button class="btn small" (click)="editPatient(patient)">
               Editar

@@ -9,19 +9,7 @@
     <option value="FEMALE">Femenino</option>
   </select>
   <input class="input" formControlName="age" type="number" placeholder="Edad" />
-  <input
-    class="input"
-    formControlName="age_education"
-    type="number"
-    placeholder="Años de educación"
-  />
-  <div class="form-row">
-    <label class="checkbox-label">
-      <input type="checkbox" formControlName="hipertension" />
-      Hipertensión
-    </label>
-    <!-- Puedes añadir más comorbilidades aquí -->
-  </div>
+
   <div class="modal-actions">
     <button type="submit" [disabled]="form.invalid">
       {{ !patient ? "Guardar" : "Crear" }}

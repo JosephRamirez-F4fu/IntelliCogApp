@@ -79,8 +79,8 @@ export class UsageGuide {
       titulo: 'Precedencia de los datos de entrenamiento',
       pasos: [
         `<b>Datos clínicos:</b> <br>
-        <b>Investigadores principales:</b> Bednorz, A.<br>
-    283 pacientes hospitalizados en el Hospital Geriátrico Juan Pablo II de Katowice entre 2015 y 2019, como parte de una evaluación geriátrica integral.<br>
+        <b>Investigadores principales:</b> LaMontagne, P., Benzinger, T., Marcus, D., et al<br>
+        OASIS-3: CONJUNTO DE DATOS LONGITUDINALES DE NEUROIMAGEN, CLÍNICOS Y COGNITIVOS PARA EL ENVEJECIMIENTO NORMAL Y LA ENFERMEDAD DE ALZHEIMER.<br>
     `,
         `<b>Resonancia Magnética:</b> <br>
     OASIS-1: Cross-Sectional<br>

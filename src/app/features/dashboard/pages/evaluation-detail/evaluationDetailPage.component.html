@@ -39,129 +39,26 @@
   <ng-container *ngIf="evaluacion?.modality === 'RF'">
     <h3 class="section-title">Datos Clínicos</h3>
     <form [formGroup]="clinicForm" class="form-section clinic-form">
-      <label>Actividades Diarias <strong>(1-6) actividades</strong></label>
-      <input
-        class="input"
-        formControlName="adl"
-        placeholder="ADL"
-        type="number"
-        [min]="1"
-        [max]="6"
-      />
-      <div
-        class="input-warning"
-        *ngIf="
-          clinicForm.get('adl')?.value !== null &&
-          (clinicForm.get('adl')?.value < 1 || clinicForm.get('adl')?.value > 6)
-        "
-      >
-        Valor fuera de rango
-      </div>
-      <label>Escala de Actividades Diarias <strong>(0-30) pts</strong></label>
-      <input
-        class="input"
-        formControlName="iadl"
-        placeholder="Escala ADL"
-        type="number"
-        [min]="0"
-        [max]="30"
-      />
-      <div
-        class="input-warning"
-        *ngIf="
-          clinicForm.get('iadl')?.value !== null &&
-          (clinicForm.get('iadl')?.value < 0 ||
-            clinicForm.get('iadl')?.value > 30)
-        "
-      >
-        Valor fuera de rango
-      </div>
-
-      <label
-        >Resultado del Test Estatico-Dinamico (BERG)
-        <strong>(0-56) pts</strong></label
-      >
-      <input
-        class="input"
-        formControlName="berg"
-        placeholder="Berg"
-        type="number"
-        [min]="0"
-        [max]="56"
-      />
-      <div
-        class="input-warning"
-        *ngIf="
-          clinicForm.get('berg')?.value !== null &&
-          (clinicForm.get('berg')?.value < 0 ||
-            clinicForm.get('berg')?.value > 56)
-        "
-      >
-        Valor fuera de rango
-      </div>
-      <label>Potasio en Sangre <strong> (3.5-5.0) mEq/L</strong></label>
-      <input
-        class="input"
-        formControlName="potassium"
-        placeholder="Potasio"
-        type="number"
-        [min]="3.5"
-        [max]="5.0"
-      />
-      <div
-        class="input-warning"
-        *ngIf="
-          clinicForm.get('potassium')?.value !== null &&
-          (clinicForm.get('potassium')?.value < 3.5 ||
-            clinicForm.get('potassium')?.value > 5.0)
-        "
-      >
-        Valor fuera de rango
-      </div>
-      <label>Vitamina D <strong> (10.0-60) ng/mL</strong></label>
-      <input
-        class="input"
-        formControlName="vitamin_d"
-        placeholder="Vitamina D"
-        type="number"
-        step="0.1"
-        [min]="10"
-        [max]="60"
-      />
-      <div
-        class="input-warning"
-        *ngIf="
-          clinicForm.get('vitamin_d')?.value !== null &&
-          (clinicForm.get('vitamin_d')?.value < 10 ||
-            clinicForm.get('vitamin_d')?.value > 60)
-        "
-      >
-        Valor fuera de rango
-      </div>
-      <label>Vitamina B12 <strong>(475.0-900 )pg/mL</strong></label>
-      <input
-        class="input"
-        formControlName="vit_b12"
-        placeholder="Vitamina B12"
-        type="number"
-        step="0.1"
-        [min]="475"
-        [max]="900"
-      />
-      <div
-        class="input-warning"
-        *ngIf="
-          clinicForm.get('vit_b12')?.value !== null &&
-          (clinicForm.get('vit_b12')?.value < 475 ||
-            clinicForm.get('vit_b12')?.value > 900)
-        "
-      >
-        Valor fuera de rango (debe estar entre 475 y 900)
-      </div>
-      <label>Estres en los Últimos 2 años</label>
-      <label class="checkbox-label">
-        <input type="checkbox" formControlName="stress" /> Sí
-      </label>
+      <p class="form-helper">
+        Sub-componentes del CDR (Clinical Dementia Rating). Seleccione un valor entre 0 y 3.
+      </p>
+      <ng-container *ngFor="let component of cdrSubComponents">
+        <label>
+          {{ component.label }}
+          <strong>(0-3)</strong>
+        </label>
+        <select class="input" [formControlName]="component.control">
+          <option [ngValue]="null" disabled>
+            Seleccione la valoración
+          </option>
+          <option
+            *ngFor="let option of cdrScoreOptions"
+            [ngValue]="option.value"
+          >
+            {{ option.label }}
+          </option>
+        </select>
+      </ng-container>
     </form>
     <div class="main-actions" *ngIf="evaluacion && evaluacion.modality == 'RF'">
       <button class="btn" (click)="ejecutarModelo()" *ngIf="evaluacion">
@@ -193,9 +90,7 @@
           <option value="" disabled selected>Seleccione su observación</option>
           <option [ngValue]="null">Ninguna</option>
           <option value="Normal">Normal</option>
-          <option value="MCI + DEMENTIA">
-            Deterioro Congnitivo Leve o Demencia
-          </option>
+          <option value="DEMENTIA">Demencia</option>
         </select>
         <select
           class="input"
