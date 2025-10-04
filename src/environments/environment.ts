@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  REST: 'http://localhost:3000', // TODO: change URL
-  RESTMODEL: 'http://localhost:3000', // TODO: change URL
+  REST: 'intellicog-api-production.up.railway.app/api/v1', // TODO: change URL
+  RESTMODEL: 'intellicog-model-production.up.railway.app/api/v1', // TODO: change URL
 };
